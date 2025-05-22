@@ -1,0 +1,208 @@
+openapi: 3.0.3
+info:
+  title: CardioCheck API
+  description: API para o aplicativo móvel CardioCheck, que avalia o risco de doenças cardíacas.
+  version: 1.0.0
+servers:
+  - url: https://api.cardiocheck.com/v1
+    description: Servidor de Produção
+  - url: https://staging.api.cardiocheck.com/v1
+    description: Servidor de Homologação
+
+paths:
+  /usuarios:
+    post:
+      summary: Cadastro de novo usuário
+      tags:
+        - Usuários
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NovoUsuario'
+      responses:
+        '201':
+          description: Usuário criado com sucesso
+        '400':
+          description: Requisição inválida
+
+  /auth/login:
+    post:
+      summary: Autenticação de usuário
+      tags:
+        - Autenticação
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+      responses:
+        '200':
+          description: Login realizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Token'
+        '401':
+          description: Credenciais inválidas
+
+  /questionarios:
+    post:
+      summary: Envio de questionário de saúde
+      tags:
+        - Questionários
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Questionario'
+      responses:
+        '200':
+          description: Questionário processado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resultado'
+        '400':
+          description: Dados do questionário inválidos
+
+  /historico:
+    get:
+      summary: Recupera o histórico de avaliações do usuário
+      tags:
+        - Histórico
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Histórico recuperado com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Avaliacao'
+        '401':
+          description: Não autorizado
+
+components:
+  schemas:
+    NovoUsuario:
+      type: object
+      properties:
+        nome:
+          type: string
+        idade:
+          type: integer
+        sexo:
+          type: string
+          enum: [Masculino, Feminino]
+        email:
+          type: string
+          format: email
+        senha:
+          type: string
+          format: password
+        endereco:
+          type: string
+        telefone:
+          type: string
+        cpf:
+          type: string
+      required:
+        - nome
+        - idade
+        - sexo
+        - email
+        - senha
+        - cpf
+
+    Login:
+      type: object
+      properties:
+        cpf:
+          type: string
+        email:
+          type: string
+          format: email
+        senha:
+          type: string
+          format: password
+      required:
+        - senha
+
+    Token:
+      type: object
+      properties:
+        accessToken:
+          type: string
+        tokenType:
+          type: string
+          example: Bearer
+
+    Questionario:
+      type: object
+      properties:
+        chestPainType:
+          type: integer
+          enum: [1, 2, 3, 4]
+        restingBloodPressure:
+          type: number
+        serumCholesterol:
+          type: number
+        fastingBloodSugar:
+          type: integer
+          enum: [0, 1]
+        restingECG:
+          type: integer
+          enum: [0, 1, 2]
+        maxHeartRate:
+          type: number
+        exerciseAngina:
+          type: integer
+          enum: [0, 1]
+        oldpeak:
+          type: number
+        stSlope:
+          type: integer
+          enum: [0, 1, 2]
+      required:
+        - chestPainType
+        - restingBloodPressure
+        - serumCholesterol
+        - fastingBloodSugar
+        - restingECG
+        - maxHeartRate
+        - exerciseAngina
+        - oldpeak
+        - stSlope
+
+    Resultado:
+      type: object
+      properties:
+        resultado:
+          type: integer
+          enum: [0, 1]
+        recomendacao:
+          type: string
+
+    Avaliacao:
+      type: object
+      properties:
+        data:
+          type: string
+          format: date-time
+        resultado:
+          type: integer
+          enum: [0, 1]
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
