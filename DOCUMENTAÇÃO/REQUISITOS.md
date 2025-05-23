@@ -177,7 +177,7 @@ O CardioCheck visa democratizar o acesso a uma ferramenta de triagem preliminar 
 A escolha das tecnologias (.NET MAUI, Node.js, Azure e Python) permite o desenvolvimento de uma solução robusta, escalável e segura, capaz de processar dados sensíveis de saúde com a devida proteção e confiabilidade. O uso de inteligência artificial possibilita a análise de múltiplos fatores de risco simultaneamente, oferecendo uma avaliação mais abrangente do que métodos tradicionais de triagem.
 
 ### Diagrama de Classes do Banco de Dados
-![alt text](<Captura de tela 2025-05-21 202014.png>)
+![alt text](<image_db.png>)
 
 ### BPMN (Business Process Model and Notation)
 ### 1. Processo Principal do CardioCheck
