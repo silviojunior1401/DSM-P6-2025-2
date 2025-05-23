@@ -50,12 +50,10 @@ O sistema é composto por quatro componentes principais:
 **RF04 - Processamento e Classificação**
 - O sistema deve enviar os dados coletados para processamento pelo modelo de IA
 - O sistema deve classificar o risco de doença cardíaca (0 - Normal, 1 - Risco de doença)
-- O sistema deve gerar recomendações personalizadas com base no resultado
 
 **RF05 - Visualização de Resultados**
 - O sistema deve exibir o resultado da classificação de forma clara e compreensível
-- O sistema deve apresentar recomendações médicas baseadas no resultado
-- O sistema deve indicar a necessidade de procurar um especialista quando apropriado
+- O sistema deve apresentar recomendações médicas baseadas no resultado, indicando a necessidade de procurar um especialista (cardiologista)
 
 **RF06 - Histórico de Avaliações**
 - O sistema deve armazenar o histórico de todas as avaliações realizadas pelo usuário
@@ -145,7 +143,6 @@ O sistema é composto por quatro componentes principais:
 **RN03 - Recomendações Médicas**
 - Usuários classificados com risco de doença cardíaca devem receber recomendação para consultar um cardiologista em até 30 dias
 - Usuários classificados como normais devem receber recomendações preventivas
-- As recomendações devem ser revisadas por profissionais de saúde qualificados
 
 **RN04 - Privacidade e Ética**
 - Os dados dos usuários não podem ser compartilhados com terceiros sem consentimento explícito
@@ -228,8 +225,7 @@ A escolha das tecnologias (.NET MAUI, Node.js, Azure e Python) permite o desenvo
 4. **Tela de Resultados**
 - Indicação visual clara do resultado (0 - Normal, 1 - Risco de doença)
 - Explicação detalhada do significado do resultado
-- Recomendações personalizadas baseadas no resultado
-- Indicação para procurar especialista (quando necessário)
+- Indicação para procurar especialista (cardiologista, quando necessário)
 - Botão para salvar ou compartilhar resultado
 - Botão para realizar nova avaliação
 
