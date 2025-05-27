@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="CardioCheck.MenuPrincipal"
+            Title="MenuPrincipal">
+
+    <ContentPage Title="Home" IconImageSource="home.png">
+        <ScrollView>
+            <Border StrokeThickness="0" Padding="0">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#E45A5A" Offset="0.0" />
+                        <GradientStop Color="#F76C5E" Offset="0.33" />
+                        <GradientStop Color="#FFA94D" Offset="0.66" />
+                        <GradientStop Color="#FFD966" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Border.Background>
+
+
+                <StackLayout Padding="20,0" Spacing="15">
+
+
+                    <Image Source="logo_white.png" HeightRequest="100" HorizontalOptions="Center" />
+
+                    <Label Text="Bem-vindo ao CardioCheck!"
+                           FontSize="Large"
+                           TextColor="White"
+                           HorizontalOptions="Center" />
+
+
+                    <Frame BackgroundColor="White"  Padding="10" HasShadow="True">
+                        <StackLayout Spacing="10">
+                            <Image Source="cardiovasculares.jpg"
+                                   Aspect="AspectFill"
+                                   HeightRequest="180"/>
+                            <Label Text="As doenças cardíacas são mais frequentes em pessoas do sexo masculino. Realizar exames médicos regulares é essencial para diagnóstico precoce e acompanhamento adequado."
+                                   FontSize="Small"
+                                   TextColor="Black"
+                                   HorizontalTextAlignment="Center" />
+                        </StackLayout>
+                    </Frame>
+
+                    <Label Text="➡️ Doenças Cardíacas mais comuns:"
+                           FontSize="Medium"
+                           TextColor="White"
+                           FontAttributes="Bold" />
+
+                    <Frame BackgroundColor="White"  Padding="10" HasShadow="True">
+                        <Grid RowSpacing="5" ColumnSpacing="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0" Text="🔴 Infarto Agudo" BackgroundColor="White" TextColor="Black" Padding="10" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+                            <Label Grid.Row="0" Grid.Column="1" Text="🔴 Arritmia" BackgroundColor="white" TextColor="Black" Padding="10" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+                            <Label Grid.Row="1" Grid.Column="0" Text="🟠 Angina" BackgroundColor="White" TextColor="Black" Padding="10" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+                            <Label Grid.Row="1" Grid.Column="1" Text="🟠 Insuficiência " BackgroundColor="White" TextColor="Black" Padding="10" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+                            <Label Grid.Row="2" Grid.Column="0" Text="🟡 Cardiomiopatia" BackgroundColor="White" TextColor="Black" Padding="10" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+                            <Label Grid.Row="2" Grid.Column="1" Text="🔴 DAC" BackgroundColor="White" TextColor="Black" Padding="10" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+                            <Label Grid.Row="3" Grid.Column="0" Text="🔴 Endocardite" BackgroundColor="White" TextColor="Black" Padding="10" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+                            <Label Grid.Row="3" Grid.Column="1" Text="🔴 Pericardite" BackgroundColor="White" TextColor="Black" Padding="10" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+                        </Grid>
+                    </Frame>
+
+
+                    <Label Text="📖 Fatores de Risco:"
+                           FontSize="Medium"
+                           TextColor="White"
+                           FontAttributes="Bold">
+                        <Label.Shadow>
+                            <Shadow Brush="Black"
+                                    Offset="1,1"
+                                    Radius="2"
+                                    Opacity="0.5" />
+                        </Label.Shadow>
+                    </Label>
+
+                    <Frame BackgroundColor="White"  Padding="10" HasShadow="True">
+                        <Grid RowSpacing="5" ColumnSpacing="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0" Text="Tabagismo" BackgroundColor="#FFA500" TextColor="Black" Padding="10" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+                            <Label Grid.Row="0" Grid.Column="1" Text="Sedentarismo" BackgroundColor="#FFB733" TextColor="Black" Padding="10" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+                            <Label Grid.Row="1" Grid.Column="0" Text="Obesidade" BackgroundColor="#FFCA3A" TextColor="Black" Padding="10" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+                            <Label Grid.Row="1" Grid.Column="1" Text="Hipertensão" BackgroundColor="#FFD84D" TextColor="Black" Padding="10" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+                            <Label Grid.Row="2" Grid.Column="0" Text="Colesterol Alto" BackgroundColor="#FFE066" TextColor="Black" Padding="10" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+                            <Label Grid.Row="2" Grid.Column="1" Text="Estresse Crônico" BackgroundColor="#FFF176" TextColor="Black" Padding="10" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+                        </Grid>
+                    </Frame>
+
+                    <BoxView HeightRequest="25" BackgroundColor="White" />
+                </StackLayout>
+            </Border>
+        </ScrollView>
+    </ContentPage>
+
+    <ContentPage Title="Calcular" IconImageSource="heart.png" x:Name="EcgPage">
+        <ScrollView>
+            <StackLayout Padding="20,0" Spacing="15">
+                <Image Source="logo.png" HeightRequest="80" HorizontalOptions="Center" />
+                <Label Text="Calcular Risco Cardíaco" FontSize="Large" TextColor="#E45A5A" HorizontalOptions="Center" />
+
+
+
+                <!-- ECG em repouso 
+                <Frame BackgroundColor="White" CornerRadius="10" Padding="10">
+                        <StackLayout>
+                            <Label Text="Idade" TextColor="Black" FontAttributes="Bold" />
+                            <Entry x:Name="IdadeEntry" Placeholder="Informe a idade" Keyboard="Numeric" TextColor="Black" />
+                        </StackLayout>
+                    </Frame>
+                -->
+
+
+                <Frame BackgroundColor="White" CornerRadius="10" Padding="10">
+                    <StackLayout>
+                        <Label Text="Pressão Sistólica (mmHg)" TextColor="Black" FontAttributes="Bold" />
+                        <Entry x:Name="PressaoEntry" Placeholder="Informe a pressão sistólica" Keyboard="Numeric" TextColor="Black" />
+                    </StackLayout>
+                </Frame>
+
+                <Frame BackgroundColor="White" CornerRadius="10" Padding="10">
+                    <StackLayout>
+                        <Label Text="Colesterol Total (mg/dL)" TextColor="Black" FontAttributes="Bold" />
+                        <Entry x:Name="ColesterolEntry" Placeholder="Informe o colesterol total" Keyboard="Numeric" TextColor="Black" />
+                    </StackLayout>
+                </Frame>
+
+
+                <Frame BackgroundColor="White" CornerRadius="10" Padding="10">
+                    <StackLayout>
+                        <Label Text="Tipo de dor no peito" TextColor="Black" FontAttributes="Bold" />
+                        <Picker x:Name="TipoDorPicker" Title="Selecione o tipo">
+                            <Picker.Items>
+                                <x:String>Tipo 1: Angina típica</x:String>
+                                <x:String>Tipo 2: Angina atípica</x:String>
+                                <x:String>Tipo 3: Dor não anginosa</x:String>
+                                <x:String>Tipo 4: Assintomático</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </StackLayout>
+                </Frame>
+
+                <Frame BackgroundColor="White" CornerRadius="10" Padding="10">
+                    <StackLayout>
+                        <Label Text="Açúcar no sangue (mg/dL)" TextColor="Black" FontAttributes="Bold" />
+                        <Entry x:Name="AcucarSangueEntry" Placeholder="Informe o valor" Keyboard="Numeric" TextColor="Black" />
+                    </StackLayout>
+                </Frame>
+
+                <!-- ECG em repouso -->
+                <Frame BackgroundColor="White" CornerRadius="10" Padding="10">
+                    <StackLayout>
+                        <Label Text="ECG em repouso" TextColor="Black" FontAttributes="Bold" />
+                        <Picker x:Name="EcgRepousoPicker" Title="Selecione a opção">
+                            <Picker.Items>
+                                <x:String>Normal</x:String>
+                                <x:String>Anormalidade ST-T</x:String>
+                                <x:String>Hipertrofia ventricular esquerda</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Frequência cardíaca máxima -->
+                <Frame BackgroundColor="White" CornerRadius="10" Padding="10">
+                    <StackLayout>
+                        <Label Text="Frequência cardíaca máxima" TextColor="Black" FontAttributes="Bold" />
+                        <Entry x:Name="FrequenciaCardiacaMaxEntry" Placeholder="Informe o valor" Keyboard="Numeric" TextColor="Black" />
+                    </StackLayout>
+                </Frame>
+
+                <!-- Angina induzida por exercício -->
+                <Frame BackgroundColor="White" CornerRadius="10" Padding="10">
+                    <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                        <Label Text="Angina provocada?" TextColor="Black" FontAttributes="Bold" VerticalOptions="Center" />
+                        <Switch x:Name="AnginaSwitch" HorizontalOptions="EndAndExpand" />
+                    </StackLayout>
+                </Frame>
+
+                <!-- Inclinação do segmento ST -->
+                <Frame BackgroundColor="White" CornerRadius="10" Padding="10">
+                    <StackLayout>
+                        <Label Text="Inclinação do ST (pico do exercício)" TextColor="Black" FontAttributes="Bold" />
+                        <Picker x:Name="StSlopePicker" Title="Selecione a inclinação">
+                            <Picker.Items>
+                                <x:String>Ascendente</x:String>
+                                <x:String>Plano</x:String>
+                                <x:String>Descendente</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </StackLayout>
+                </Frame>
+
+
+
+                <Button Text="Calcular Risco" BackgroundColor="#E45A5A" TextColor="White" CornerRadius="12" FontAttributes="Bold" Clicked="CalcularRisco_Clicked" />
+
+                <Label x:Name="ResultadoLabel" Text="Seu risco aparecerá aqui..." FontSize="16" TextColor="Gray" HorizontalOptions="Center" />
+                <BoxView HeightRequest="40" BackgroundColor="White" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage>
+
+    <ContentPage Title="Sobre" IconImageSource="info.png">
+        <ScrollView>
+            <Border StrokeThickness="0" Padding="0">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Color="#E45A5A" Offset="0.0" />
+                        <GradientStop Color="#F76C5E" Offset="0.33" />
+                        <GradientStop Color="#FFA94D" Offset="0.66" />
+                        <GradientStop Color="#FFD966" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Border.Background>
+
+                <StackLayout Padding="20,0" Spacing="10">
+                    <Image Source="logo_white.png" HeightRequest="100" HorizontalOptions="Center" />
+
+                    <Label Text="Sobre o App" FontSize="Medium" TextColor="White" HorizontalOptions="Center" FontAttributes="Bold" />
+                    <Label Text="O CardioCheck é um protótipo desenvolvido para verificar a possibilidade de doenças cardíacas através de sintomas, exames (ECG), frequência cardíaca, idade e sexo."
+                           FontSize="Small" TextColor="White" HorizontalTextAlignment="Center" />
+                    <Image Source="heart_animated.gif" HeightRequest="200" HorizontalOptions="Center" />
+                </StackLayout>
+            </Border>
+        </ScrollView>
+    </ContentPage>
+
+    <ContentPage Title="Alunos" IconImageSource="people.png">
+        <ScrollView>
+            <Border Stroke="LightGray" StrokeThickness="1" Margin="20" Padding="20" BackgroundColor="White" 
+            HorizontalOptions="Center" VerticalOptions="Center">
+                <VerticalStackLayout Spacing="15" HorizontalOptions="Center">
+                    <Label Text="FELIPE FERREIRA REZENDE" 
+                   FontSize="Medium" 
+                   TextColor="Black" 
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+
+                    <Label Text="GIAN CARLO FAVA" 
+                   FontSize="Medium" 
+                   TextColor="Black" 
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+
+                    <Label Text="KEVIN DE ALMEIDA BRANDÃO" 
+                   FontSize="Medium" 
+                   TextColor="Black" 
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+
+                    <Label Text="SILVIO ALVES DA SILVA JUNIOR" 
+                   FontSize="Medium" 
+                   TextColor="Black" 
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Border>
+        </ScrollView>
+
+    </ContentPage>
+
+
+</TabbedPage>
