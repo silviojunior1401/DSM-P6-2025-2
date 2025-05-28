@@ -9,10 +9,10 @@
             <Border StrokeThickness="0" Padding="0">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                        <GradientStop Color="#E45A5A" Offset="0.0" />
-                        <GradientStop Color="#F76C5E" Offset="0.33" />
-                        <GradientStop Color="#FFA94D" Offset="0.66" />
-                        <GradientStop Color="#FFD966" Offset="1.0" />
+                        <GradientStop Color="#0073C2" Offset="0.0" />
+                        <GradientStop Color="#00A2E5" Offset="0.33" />
+                        <GradientStop Color="#4DD6C2" Offset="0.66" />
+                        <GradientStop Color="#6BD47B" Offset="1.0" />
                     </LinearGradientBrush>
                 </Border.Background>
 
@@ -113,7 +113,7 @@
         <ScrollView>
             <StackLayout Padding="20,0" Spacing="15">
                 <Image Source="logo.png" HeightRequest="80" HorizontalOptions="Center" />
-                <Label Text="Calcular Risco Cardíaco" FontSize="Large" TextColor="#E45A5A" HorizontalOptions="Center" />
+                <Label Text="Calcular Risco Cardíaco" FontSize="Large" TextColor="#00A2E5" HorizontalOptions="Center" />
 
 
 
@@ -209,7 +209,7 @@
 
 
 
-                <Button Text="Calcular Risco" BackgroundColor="#E45A5A" TextColor="White" CornerRadius="12" FontAttributes="Bold" Clicked="CalcularRisco_Clicked" />
+                <Button Text="Calcular Risco" BackgroundColor="#00A2E5" TextColor="White" CornerRadius="12" FontAttributes="Bold" Clicked="CalcularRisco_Clicked" />
 
                 <Label x:Name="ResultadoLabel" Text="Seu risco aparecerá aqui..." FontSize="16" TextColor="Gray" HorizontalOptions="Center" />
                 <BoxView HeightRequest="40" BackgroundColor="White" />
@@ -222,10 +222,10 @@
             <Border StrokeThickness="0" Padding="0">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                        <GradientStop Color="#E45A5A" Offset="0.0" />
-                        <GradientStop Color="#F76C5E" Offset="0.33" />
-                        <GradientStop Color="#FFA94D" Offset="0.66" />
-                        <GradientStop Color="#FFD966" Offset="1.0" />
+                        <GradientStop Color="#0073C2" Offset="0.0" />
+                        <GradientStop Color="#00A2E5" Offset="0.33" />
+                        <GradientStop Color="#4DD6C2" Offset="0.66" />
+                        <GradientStop Color="#6BD47B" Offset="1.0" />
                     </LinearGradientBrush>
                 </Border.Background>
 
