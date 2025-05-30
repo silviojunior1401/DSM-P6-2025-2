@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: CardioCheck API
-  description: API para o aplicativo móvel CardioCheck, que avalia o risco de doenças cardíacas.
+  description: API para o aplicativo móvel CardioCheck, utilizado por médicos para avaliar o risco de doenças cardíacas em pacientes.
   version: 1.0.0
 servers:
   - url: https://api.cardiocheck.com/v1
@@ -10,26 +10,26 @@ servers:
     description: Servidor de Homologação
 
 paths:
-  /usuarios:
+  /medicos:
     post:
-      summary: Cadastro de novo usuário
+      summary: Cadastro de novo médico
       tags:
-        - Usuários
+        - Médicos
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NovoUsuario'
+              $ref: '#/components/schemas/NovoMedico'
       responses:
         '201':
-          description: Usuário criado com sucesso
+          description: Médico criado com sucesso
         '400':
           description: Requisição inválida
 
   /auth/login:
     post:
-      summary: Autenticação de usuário
+      summary: Autenticação de médico
       tags:
         - Autenticação
       requestBody:
@@ -50,7 +50,7 @@ paths:
 
   /questionarios:
     post:
-      summary: Envio de questionário de saúde
+      summary: Envio de questionário de saúde do paciente
       tags:
         - Questionários
       security:
@@ -73,7 +73,7 @@ paths:
 
   /historico:
     get:
-      summary: Recupera o histórico de avaliações do usuário
+      summary: Recupera o histórico de avaliações do médico
       tags:
         - Histórico
       security:
@@ -92,40 +92,31 @@ paths:
 
 components:
   schemas:
-    NovoUsuario:
+    NovoMedico:
       type: object
       properties:
         nome:
           type: string
-        idade:
-          type: integer
-        sexo:
+        crm:
           type: string
-          enum: [Masculino, Feminino]
         email:
           type: string
           format: email
         senha:
           type: string
           format: password
-        endereco:
-          type: string
-        telefone:
-          type: string
-        cpf:
+        especialidade:
           type: string
       required:
         - nome
-        - idade
-        - sexo
+        - crm
         - email
         - senha
-        - cpf
 
     Login:
       type: object
       properties:
-        cpf:
+        crm:
           type: string
         email:
           type: string
@@ -148,6 +139,11 @@ components:
     Questionario:
       type: object
       properties:
+        age:
+          type: integer
+        sex:
+          type: integer
+          enum: [0, 1]
         chestPainType:
           type: integer
           enum: [1, 2, 3, 4]
@@ -172,6 +168,8 @@ components:
           type: integer
           enum: [0, 1, 2]
       required:
+        - age
+        - sex
         - chestPainType
         - restingBloodPressure
         - serumCholesterol
