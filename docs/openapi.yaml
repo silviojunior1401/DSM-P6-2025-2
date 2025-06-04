@@ -116,8 +116,6 @@ components:
     Login:
       type: object
       properties:
-        crm:
-          type: string
         email:
           type: string
           format: email
@@ -139,6 +137,8 @@ components:
     Questionario:
       type: object
       properties:
+        nome:
+          type: string
         age:
           type: integer
         sex:
@@ -168,6 +168,7 @@ components:
           type: integer
           enum: [0, 1, 2]
       required:
+        - nome
         - age
         - sex
         - chestPainType
