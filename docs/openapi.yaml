@@ -6,7 +6,7 @@ info:
 servers:
   - url: https://api.cardiocheck.com/v1
     description: Servidor de Produção
-  - url: https://staging.api.cardiocheck.com/v1
+  - url: http://localhost:3000/v1
     description: Servidor de Homologação
 
 paths:
