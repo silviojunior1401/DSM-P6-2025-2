@@ -20,6 +20,7 @@ export class CreateTables1748990904205 implements MigrationInterface {
         await queryRunner.query(`
       CREATE TABLE questionarios (
         id VARCHAR(36) NOT NULL PRIMARY KEY,
+        nome VARCHAR(100) NOT NULL,
         age INT NOT NULL,
         sex TINYINT NOT NULL,
         chestPainType TINYINT NOT NULL,

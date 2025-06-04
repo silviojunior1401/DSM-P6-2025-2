@@ -10,6 +10,7 @@ questionarioRoutes.post(
     "/",
     authMiddleware,
     [
+        body("nome").notEmpty().withMessage("Nome é obrigatório"),
         body("age").isInt().withMessage("Idade deve ser um número inteiro"),
         body("sex")
             .isInt({ min: 0, max: 1 })

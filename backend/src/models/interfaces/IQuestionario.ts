@@ -1,4 +1,5 @@
 export interface IQuestionario {
+    nome: string;
     age: number;
     sex: number;
     chestPainType: number;

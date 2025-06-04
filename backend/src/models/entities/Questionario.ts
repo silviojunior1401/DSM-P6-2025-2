@@ -12,6 +12,9 @@ export class Questionario {
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
+    @Column({ type: "varchar" })
+    nome: string;
+
     @Column({ type: "int" })
     age: number;
 
