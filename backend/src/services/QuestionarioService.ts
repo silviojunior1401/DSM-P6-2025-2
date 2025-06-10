@@ -1,3 +1,6 @@
+import { exec } from "child_process";
+import { promisify } from "util";
+import * as path from "path";
 import { QuestionarioRepository } from "../repositories/QuestionarioRepository";
 import { AvaliacaoRepository } from "../repositories/AvaliacaoRepository";
 import { IQuestionario, IResultado } from "../models/interfaces/IQuestionario";
@@ -20,6 +23,7 @@ export class QuestionarioService {
     ): Promise<IResultado> {
         // Validar se o médico existe
         const medico = await this.medicoRepository.findById(medicoId);
+        const execPromise = promisify(exec);
         if (!medico) {
             throw new Error("Médico não encontrado");
         }
@@ -29,28 +33,87 @@ export class QuestionarioService {
             questionarioData
         );
 
-        // Algoritmo simplificado para avaliação de risco cardíaco
-        // Em um cenário real, este seria um algoritmo mais complexo baseado em evidências médicas
-        const riskScore = this.calculateRiskScore(questionarioData); /// ALTERAR PARA IA
+        try {
+            // Extrair os dados relevantes do questionário para o modelo de IA
+            const modelInput =
+                this.extractModelInputFromQuestionario(questionarioData);
 
-        // Determinar resultado (0 = baixo risco, 1 = alto risco)
-        const resultado = riskScore > 15 ? 1 : 0;
+            // Converter os dados para o formato JSON esperado pelo script Python
+            const inputJson = JSON.stringify([modelInput]);
 
-        // Gerar recomendação baseada no resultado
-        const recomendacao = this.generateRecommendation(
-            resultado,
-            questionarioData
-        );
+            // Caminho para o script Python (ajuste conforme necessário)
+            const pythonScriptPath = path.resolve(
+                __dirname,
+                "../utils/python/class_heart.py"
+            );
 
-        // Salvar avaliação
-        await this.avaliacaoRepository.create({
-            resultado,
-            recomendacao,
-            medicoId,
-            questionarioId: questionario.id,
-        });
+            // Executar o script Python com os dados do questionário
+            const { stdout, stderr } = await execPromise(
+                `python ${pythonScriptPath} --input "${inputJson}"`
+            );
 
-        return { resultado, recomendacao };
+            if (stderr) {
+                console.error("Erro ao executar o modelo Python:", stderr);
+                throw new Error("Falha ao processar o algoritmo de predição");
+            }
+
+            // Extrair o resultado da saída do script Python
+            // Assumindo que a saída é algo como "Resultado da previsão: [1]"
+            const outputLines = stdout.trim().split("\n");
+            const resultLine = outputLines.find((line) => line.includes("["));
+
+            if (!resultLine) {
+                throw new Error("Formato de saída do modelo inesperado");
+            }
+
+            // Extrair o valor numérico do resultado (0 ou 1)
+            const resultMatch = resultLine.match(/(\d+)/);
+            console.log(resultMatch);
+            const resultado = resultMatch ? parseInt(resultMatch[1], 10) : 0;
+
+            // Gerar recomendação baseada no resultado
+            const recomendacao = this.generateRecommendation(
+                resultado,
+                questionarioData
+            );
+
+            // Salvar avaliação
+            await this.avaliacaoRepository.create({
+                resultado,
+                recomendacao,
+                medicoId,
+                questionarioId: questionario.id,
+            });
+
+            return { resultado, recomendacao };
+        } catch (error: Error | any) {
+            console.error("Erro ao processar questionário:", error);
+            throw new Error(
+                `Falha ao processar o questionário: ${error.message}`
+            );
+        }
+    }
+
+    private extractModelInputFromQuestionario(
+        questionario: IQuestionario
+    ): number[] {
+        // Mapear os campos do questionário para o formato esperado pelo modelo
+        // [age, resting bp s, cholesterol, max heart rate, oldpeak, sex, chest pain type,
+        // fasting blood sugar, resting ecg, exercise angina, ST slope]
+
+        return [
+            questionario.age,
+            questionario.restingBloodPressure,
+            questionario.serumCholesterol,
+            questionario.maxHeartRate,
+            questionario.oldpeak,
+            questionario.sex,
+            questionario.chestPainType,
+            questionario.fastingBloodSugar,
+            questionario.restingECG,
+            questionario.exerciseAngina,
+            questionario.stSlope,
+        ];
     }
 
     private calculateRiskScore(data: IQuestionario): number {
