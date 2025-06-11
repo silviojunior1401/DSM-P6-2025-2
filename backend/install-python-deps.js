@@ -1,7 +1,7 @@
 const { exec } = require("child_process");
 
 function installWithPythonCmd(cmd) {
-    exec(`${cmd} -m ensurepip --upgrade && ${cmd} -m pip install --upgrade pip`, (err, stdout, stderr) => {
+    exec(`${cmd} -m pip install --upgrade pip`, (err, stdout, stderr) => {
         if (err) {
             if (cmd === "python") {
                 // Tenta com python3
