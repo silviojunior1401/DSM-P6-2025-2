@@ -1,4 +1,7 @@
-﻿using Microsoft.Maui.Controls;
+﻿using System.Text;
+using System.Text.Json;
+using Microsoft.Maui.Controls;
+using CardioCheck.Models;
 
 namespace CardioCheck;
 
@@ -10,23 +13,61 @@ public partial class LoginPage : ContentPage
         NavigationPage.SetHasNavigationBar(this, false);
     }
 
-    private void OnEntrarClicked(object sender, EventArgs e)
+    // Método para fazer login
+    private async void OnEntrarClicked(object sender, EventArgs e)
     {
-        string usuario = UsuarioEntry.Text?.Trim();
+        string email = UsuarioEntry.Text?.Trim();
         string senha = SenhaEntry.Text?.Trim();
 
-        if (usuario == "admin" && senha == "admin")
+        if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(senha))
         {
-
-            Microsoft.Maui.Controls.Application.Current.Dispatcher.Dispatch(() =>
-            {
-                Application.Current.MainPage = new MenuPrincipal();
-            });
+            MensagemErro.Text = "Preencha usuário e senha.";
+            return;
         }
-        else
+
+        try
         {
-            MensagemErro.Text = " Usu�rio ou senha incorretos! \nTente novamente.";
+            var httpClient = new HttpClient();
+            var url = $"{SessaoLogin.UrlApi}/auth/login";
+
+            var payload = new
+            {
+                email = email,
+                senha = senha
+            };
+
+            var json = JsonSerializer.Serialize(payload);
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await httpClient.PostAsync(url, content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonResponse = await response.Content.ReadAsStringAsync();
+                using var document = JsonDocument.Parse(jsonResponse);
+
+                var token = document.RootElement.GetProperty("token").GetString();
+
+                SessaoLogin.Email = email;
+                SessaoLogin.Token = token;
+
+                // Vai para o Menu Principal
+                Application.Current.MainPage = new NavigationPage(new MenuPrincipal());
+            }
+            else
+            {
+                MensagemErro.Text = "Usuário ou senha incorretos.";
+            }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Erro", $"Erro ao conectar: {ex.Message}", "OK");
         }
     }
 
+    // Método para ir para tela de cadastro
+    private async void OnCadastrarClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new CadastroPage());
+    }
 }

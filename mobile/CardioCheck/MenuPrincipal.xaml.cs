@@ -2,6 +2,7 @@ using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.PlatformConfiguration;
 using Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;
 
+
 namespace CardioCheck;
 
 public partial class MenuPrincipal : Microsoft.Maui.Controls.TabbedPage

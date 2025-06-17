@@ -3,39 +3,65 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CardioCheck.LoginPage"
              Title="Login"
-             BackgroundColor="White">
+             BackgroundColor="#F2F2F2">
 
-    <StackLayout Padding="30" Spacing="20" VerticalOptions="Center">
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="CenterAndExpand">
 
+            <!-- Título -->
+            <Label Text="CardioCheck"
+                   FontSize="32"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="#0073C2"/>
 
-        <Entry x:Name="UsuarioEntry"
-               Placeholder="Usuário"
-               Keyboard="Default"
-               Text="admin"
-               TextColor="Black"
-               IsTextPredictionEnabled="False"
-               BackgroundColor="White" />
+            <Label Text="Acesse sua conta"
+                   FontSize="18"
+                   HorizontalOptions="Center"
+                   TextColor="Gray"/>
 
-        <Entry x:Name="SenhaEntry"
-               Placeholder="Senha"
-               Text="admin"
-               IsPassword="True"
-               TextColor="Black"
-               IsTextPredictionEnabled="False"
-               BackgroundColor="White" />
+            <!-- Entrada de email -->
+            <Entry x:Name="UsuarioEntry"
+                   Placeholder="E-mail"
+                   Keyboard="Email"
+                   BackgroundColor="White"
+                   TextColor="Black"/>
 
-        <Button Text="Entrar"
-                BackgroundColor="#E45A5A"
-                TextColor="White"
-                CornerRadius="10"
-                Clicked="OnEntrarClicked" />
+            <!-- Entrada de senha -->
+            <Entry x:Name="SenhaEntry"
+                   Placeholder="Senha"
+                   IsPassword="True"
+                   BackgroundColor="White"
+                   TextColor="Black"/>
 
-        <Label x:Name="MensagemErro"
-               Text=""
-               TextColor="Red"
-               FontSize="Medium"
-               HorizontalOptions="Center"
-               HorizontalTextAlignment="Center" />
+            <!-- Mensagem de erro -->
+            <Label x:Name="MensagemErro"
+                   TextColor="Red"
+                   FontSize="14"
+                   HorizontalOptions="Center"/>
 
-    </StackLayout>
+            <!-- Botão de login -->
+            <Button Text="Entrar"
+                    Clicked="OnEntrarClicked"
+                    BackgroundColor="#0073C2"
+                    TextColor="White"
+                    CornerRadius="10"
+                    HeightRequest="50"/>
+
+            <!-- Botão de cadastro -->
+            <Button Text="Cadastrar Médico"
+                    Clicked="OnCadastrarClicked"
+                    BackgroundColor="#595959"
+                    TextColor="White"
+                    CornerRadius="10"
+                    HeightRequest="50"/>
+
+            <!-- Rodapé -->
+            <Label Text="Versão 1.0"
+                   FontSize="12"
+                   HorizontalOptions="Center"
+                   TextColor="Gray"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
