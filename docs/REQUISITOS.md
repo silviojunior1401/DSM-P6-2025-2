@@ -13,19 +13,19 @@ O sistema é composto por quatro componentes principais:
 - **Modelo de IA:** Desenvolvido em Python, utiliza algoritmos de aprendizado de máquina para classificar o risco de doença cardíaca com base nos dados fornecidos pelo usuário.
 
 ### Fluxo de Dados
-- O usuário se cadastra e faz login no aplicativo
-- O usuário preenche o questionário com seus dados de saúde
+- O médico se cadastra e faz login no aplicativo
+- O médico preenche o questionário com dados de saúde do paciente
 - Os dados são enviados para a API
 - A API encaminha os dados para o modelo de IA
 - O modelo processa os dados e retorna uma classificação (0 - Normal, 1 - Risco de doença cardíaca)
-- O resultado é armazenado no banco de dados e exibido para o usuário
-- Recomendações são fornecidas com base no resultado
+- O resultado é armazenado no banco de dados e exibido para o médico
+- Recomendações são fornecidas com base no resultado adquirido pelo questionário
 
 ### Análise de Requisitos
 
 ### 1. Requisitos Funcionais
-**RF01 - Cadastro de Usuário**
-- O sistema deve permitir o cadastro de novos usuários coletando: Nome, Idade, Sexo, Email, Senha, Endereço, Telefone e CPF
+**RF01 - Cadastro do Médico**
+- O sistema deve permitir o cadastro de novos médicos coletando: Nome, Idade, Sexo, Email, Senha, Endereço, Telefone e CPF
 - O sistema deve validar a unicidade do CPF e email
 - O sistema deve criptografar a senha do usuário antes de armazená-la
 
@@ -56,9 +56,8 @@ O sistema é composto por quatro componentes principais:
 - O sistema deve apresentar recomendações médicas baseadas no resultado, indicando a necessidade de procurar um especialista (cardiologista)
 
 **RF06 - Histórico de Avaliações**
-- O sistema deve armazenar o histórico de todas as avaliações realizadas pelo usuário
-- O sistema deve permitir a visualização do histórico em formato de cards, exibindo data e resultado
-- O sistema deve permitir a exclusão de registros do histórico
+- O sistema deve armazenar o histórico de todas as avaliações realizadas
+- O sistema deve permitir a visualização do histórico 
 
 ### 2. Requisitos Não Funcionais
 **RNF01 - Desempenho**
@@ -68,7 +67,6 @@ O sistema é composto por quatro componentes principais:
 
 **RNF02 - Segurança**
 - Todos os dados pessoais e médicos devem ser criptografados em trânsito e em repouso
-- O sistema deve implementar autenticação de dois fatores
 - O sistema deve estar em conformidade com a LGPD (Lei Geral de Proteção de Dados)
 - O sistema deve realizar backups diários dos dados
 
@@ -77,15 +75,11 @@ O sistema é composto por quatro componentes principais:
 - O aplicativo deve seguir as diretrizes de design do Material Design
 - O sistema deve fornecer feedback claro sobre erros e ações realizadas
 
-**RNF04 - Disponibilidade**
-- O sistema deve estar disponível 99,9% do tempo (downtime máximo de 8,76 horas por ano)
-- Manutenções programadas devem ser realizadas em horários de baixo uso
-
-**RNF05 - Escalabilidade**
+**RNF04 - Escalabilidade**
 - A arquitetura deve permitir escalar horizontalmente para atender ao aumento de demanda
 - O banco de dados deve suportar crescimento de até 1TB por ano
 
-**RNF06 - Compatibilidade**
+**RNF05 - Compatibilidade**
 - O aplicativo deve ser compatível com Android 8.0 (Oreo) ou superior
 - A interface deve se adaptar a diferentes tamanhos de tela
 
@@ -131,7 +125,7 @@ O sistema é composto por quatro componentes principais:
 
 ### Regras de Negócio
 **RN01 - Cadastro e Acesso**
-- Apenas usuários maiores de 18 anos podem se cadastrar no sistema
+- Apenas usuários médicos podem se cadastrar no sistema
 - Um CPF só pode estar associado a uma única conta
 - Um email só pode estar associado a uma única conta
 
@@ -147,30 +141,17 @@ O sistema é composto por quatro componentes principais:
 **RN04 - Privacidade e Ética**
 - Os dados dos usuários não podem ser compartilhados com terceiros sem consentimento explícito
 - O sistema deve apresentar termos de uso e política de privacidade claros
-- O usuário deve poder solicitar a exclusão completa de seus dados
 
 **RN05 - Limitações e Avisos**
 - O sistema deve exibir claramente que não substitui diagnóstico médico profissional
 - Resultados críticos devem ser acompanhados de avisos sobre a urgência de buscar atendimento médico
 
-**RN06 - Preenchimento Parcial** 
-- Se o usuário não possuir algum dos dados solicitados, o sistema deve oferecer a opção de salvar o questionário parcialmente preenchido para continuação posterior
-
-**RN07 - Obtençao de Dados** 
-- O sistema deve fornecer explicações claras sobre como obter os dados médicos solicitados 
-
-**RN08 - Outliers**
-- Para valores extremos (outliers), o sistema deve solicitar confirmação do usuário antes de prosseguir
-
-**RN09 - Anexos**
+**RN06 - Anexos**
 - O sistema deve permitir que o usuário anexe resultados de exames (opcional) para referência futura
-
-**RN10 - Avisos**
-- O sistema deve alertar o usuário sobre a importância de fornecer dados precisos para a acurácia da avaliação.
 
 ### Justificativa
 As doenças cardiovasculares são a principal causa de morte no mundo, sendo responsáveis por aproximadamente 17,9 milhões de óbitos anualmente, segundo a Organização Mundial da Saúde. A detecção precoce de fatores de risco e a identificação de sinais de alerta podem salvar vidas e reduzir custos com tratamentos intensivos.
-O CardioCheck visa democratizar o acesso a uma ferramenta de triagem preliminar que pode alertar usuários sobre potenciais riscos cardíacos, incentivando-os a buscar atendimento médico especializado quando necessário. A aplicação não substitui o diagnóstico médico, mas serve como um primeiro passo para conscientização e prevenção.
+O CardioCheck visa democratizar o acesso a uma ferramenta que pode alertar sobre potenciais riscos cardíacos, incentivando a busca por atendimento médico especializado quando necessário. A aplicação não substitui o diagnóstico do médico especialista, mas serve como um primeiro passo para conscientização e prevenção.
 A escolha das tecnologias (.NET MAUI, Node.js, Azure e Python) permite o desenvolvimento de uma solução robusta, escalável e segura, capaz de processar dados sensíveis de saúde com a devida proteção e confiabilidade. O uso de inteligência artificial possibilita a análise de múltiplos fatores de risco simultaneamente, oferecendo uma avaliação mais abrangente do que métodos tradicionais de triagem.
 
 ### Diagrama de Classes do Banco de Dados
@@ -178,27 +159,31 @@ A escolha das tecnologias (.NET MAUI, Node.js, Azure e Python) permite o desenvo
 
 ### BPMN (Business Process Model and Notation)
 ### 1. Processo Principal do CardioCheck
-[Início] --> [Cadastro de Usuário] --> [Login] --> [Preenchimento do Questionário] 
+[Início] --> [Cadastro de Usuário (médico)] --> [Login] --> [Preenchimento do Questionário] 
 --> [Envio para Processamento] --> [Análise pelo Modelo de IA] 
 --> [Geração de Resultado] --> [Exibição do Resultado e Recomendações] 
 --> [Armazenamento no Histórico] --> [Fim]
+![alt text](<BPMN1.png>)
 
 ### 2. Subprocesso: Cadastro de Usuário
 [Início] --> [Preenchimento de Dados Pessoais] --> [Validação de Dados] 
 --> <Dados Válidos?> 
    --> [Sim] --> [Criação de Conta] --> [Envio de Email de Confirmação] --> [Fim]
    --> [Não] --> [Exibição de Erros] --> [Preenchimento de Dados Pessoais]
+![alt text](<BPMN2.png>)
 
 ### 3. Subprocesso: Preenchimento do Questionário
 [Início] --> [Exibição das Perguntas] --> [Coleta de Respostas] 
 --> [Validação das Respostas] --> <Respostas Completas?> 
    --> [Sim] --> [Confirmação dos Dados] --> [Fim]
    --> [Não] --> [Exibição de Campos Pendentes] --> [Coleta de Respostas]
+![alt text](<BPMN3.jpeg>)
 
 ### 4. Subprocesso: Análise pelo Modelo de IA
 [Início] --> [Recebimento dos Dados] --> [Pré-processamento] 
 --> [Aplicação do Modelo de Classificação] --> [Cálculo de Probabilidade] 
 --> [Determinação do Resultado Final] --> [Geração de Recomendações] --> [Fim]
+![alt text](<BPMN4.jpeg>)
 
 ### Detalhamento das Telas
 1. **Tela de Cadastro**
