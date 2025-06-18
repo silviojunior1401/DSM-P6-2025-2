@@ -159,31 +159,18 @@ A escolha das tecnologias (.NET MAUI, Node.js, Azure e Python) permite o desenvo
 
 ### BPMN (Business Process Model and Notation)
 ### 1. Processo Principal do CardioCheck
-[Início] --> [Cadastro de Usuário (médico)] --> [Login] --> [Preenchimento do Questionário] 
---> [Envio para Processamento] --> [Análise pelo Modelo de IA] 
---> [Geração de Resultado] --> [Exibição do Resultado e Recomendações] 
---> [Armazenamento no Histórico] --> [Fim]
 ![alt text](<BPMN1.png>)
 
 ### 2. Subprocesso: Cadastro de Usuário
-[Início] --> [Preenchimento de Dados Pessoais] --> [Validação de Dados] 
---> <Dados Válidos?> 
-   --> [Sim] --> [Criação de Conta] --> [Envio de Email de Confirmação] --> [Fim]
-   --> [Não] --> [Exibição de Erros] --> [Preenchimento de Dados Pessoais]
 ![alt text](<BPMN2.png>)
 
 ### 3. Subprocesso: Preenchimento do Questionário
-[Início] --> [Exibição das Perguntas] --> [Coleta de Respostas] 
---> [Validação das Respostas] --> <Respostas Completas?> 
-   --> [Sim] --> [Confirmação dos Dados] --> [Fim]
-   --> [Não] --> [Exibição de Campos Pendentes] --> [Coleta de Respostas]
-![alt text](<BPMN3.jpeg>)
+![alt text](<BPMN3.png>)
 
 ### 4. Subprocesso: Análise pelo Modelo de IA
-[Início] --> [Recebimento dos Dados] --> [Pré-processamento] 
---> [Aplicação do Modelo de Classificação] --> [Cálculo de Probabilidade] 
---> [Determinação do Resultado Final] --> [Geração de Recomendações] --> [Fim]
-![alt text](<BPMN4.jpeg>)
+![alt text](<BPMN4.png>)
+
+![alt text](<BPMN5.png>)
 
 ### Detalhamento das Telas
 1. **Tela de Cadastro**
