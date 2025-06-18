@@ -174,7 +174,7 @@ A escolha das tecnologias (.NET MAUI, Node.js, Azure e Python) permite o desenvo
 
 ### Detalhamento das Telas
 1. **Tela de Cadastro**
-- Campos para entrada de dados pessoais (Nome, Idade, Sexo, Email, Senha, Endereço, Telefone, CPF)
+- Campos para entrada de dados pessoais (Nome, CRM, Email, Senha, Especialidade)
 - Validação em tempo real dos campos
 - Botão para enviar cadastro
 - Link para tela de login (caso já tenha conta)
@@ -206,7 +206,6 @@ A escolha das tecnologias (.NET MAUI, Node.js, Azure e Python) permite o desenvo
 - Cada card contém data e resultado (positivo/negativo)
 - Opção para filtrar por período
 - Opção para ordenar por data
-- Funcionalidade para excluir registros
 - Gráfico de tendência (opcional)
 
 ### Conclusão
