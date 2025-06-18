@@ -2,6 +2,7 @@
 using System.Text.Json;
 using Microsoft.Maui.Controls;
 using CardioCheck.Models;
+using System.Net.Http.Headers;
 
 namespace CardioCheck;
 
@@ -13,7 +14,6 @@ public partial class LoginPage : ContentPage
         NavigationPage.SetHasNavigationBar(this, false);
     }
 
-    // Método para fazer login
     private async void OnEntrarClicked(object sender, EventArgs e)
     {
         string email = UsuarioEntry.Text?.Trim();
@@ -40,23 +40,33 @@ public partial class LoginPage : ContentPage
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             var response = await httpClient.PostAsync(url, content);
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+
+            Console.WriteLine(jsonResponse);  // 🔧 Para debug
 
             if (response.IsSuccessStatusCode)
             {
-                var jsonResponse = await response.Content.ReadAsStringAsync();
                 using var document = JsonDocument.Parse(jsonResponse);
 
-                var token = document.RootElement.GetProperty("token").GetString();
+                if (document.RootElement.TryGetProperty("accessToken", out var tokenElement))
+                {
+                    var token = tokenElement.GetString();
 
-                SessaoLogin.Email = email;
-                SessaoLogin.Token = token;
+                    SessaoLogin.Email = email;
+                    SessaoLogin.Token = token;
 
-                // Vai para o Menu Principal
-                Application.Current.MainPage = new NavigationPage(new MenuPrincipal());
+                    Application.Current.MainPage = new NavigationPage(new MenuPrincipal());
+                }
+                else
+                {
+                    await DisplayAlert("Erro", "Token não encontrado na resposta. Verifique usuário e senha.", "OK");
+                    MensagemErro.Text = "Usuário ou senha incorretos.";
+                }
             }
             else
             {
-                MensagemErro.Text = "Usuário ou senha incorretos.";
+                await DisplayAlert("Erro", $"Erro ao fazer login:\n{jsonResponse}", "OK");
+                MensagemErro.Text = "Falha no login. Verifique os dados.";
             }
         }
         catch (Exception ex)
@@ -65,7 +75,6 @@ public partial class LoginPage : ContentPage
         }
     }
 
-    // Método para ir para tela de cadastro
     private async void OnCadastrarClicked(object sender, EventArgs e)
     {
         await Navigation.PushAsync(new CadastroPage());

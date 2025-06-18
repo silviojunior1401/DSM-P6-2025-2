@@ -14,6 +14,11 @@ public partial class CadastroPage : ContentPage
         NavigationPage.SetHasNavigationBar(this, false);
     }
 
+    private async void OnVoltarClicked(object sender, EventArgs e)
+    {
+        await Navigation.PopAsync();
+    }
+
     private async void OnCadastrarClicked(object sender, EventArgs e)
     {
         string nome = NomeEntry.Text?.Trim();
@@ -47,7 +52,7 @@ public partial class CadastroPage : ContentPage
             var json = JsonSerializer.Serialize(payload);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            await DisplayAlert("Erro", url, "OK");
+            
 
             var response = await httpClient.PostAsync(url, content);
 
@@ -56,6 +61,7 @@ public partial class CadastroPage : ContentPage
                 MensagemLabel.TextColor = Colors.Green;
                 MensagemLabel.Text = "Cadastro realizado com sucesso!";
                 LimparCampos();
+                await Navigation.PushAsync(new LoginPage());
             }
             else
             {

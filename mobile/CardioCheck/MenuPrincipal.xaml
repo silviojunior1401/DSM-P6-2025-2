@@ -209,39 +209,10 @@
         </ScrollView>
     </ContentPage>
 
-    <ContentPage Title="Alunos" IconImageSource="people.png">
-        <ScrollView>
-            <Border Stroke="LightGray" StrokeThickness="1" Margin="20" Padding="20" BackgroundColor="White" 
-            HorizontalOptions="Center" VerticalOptions="Center">
-                <VerticalStackLayout Spacing="15" HorizontalOptions="Center">
-                    <Label Text="FELIPE FERREIRA REZENDE" 
-                   FontSize="Medium" 
-                   TextColor="Black" 
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center" />
+  
+ 
 
-                    <Label Text="GIAN CARLO FAVA" 
-                   FontSize="Medium" 
-                   TextColor="Black" 
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center" />
 
-                    <Label Text="KEVIN DE ALMEIDA BRANDÃO" 
-                   FontSize="Medium" 
-                   TextColor="Black" 
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center" />
-
-                    <Label Text="SILVIO ALVES DA SILVA JUNIOR" 
-                   FontSize="Medium" 
-                   TextColor="Black" 
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center" />
-                </VerticalStackLayout>
-            </Border>
-        </ScrollView>
-
-    </ContentPage>
 
 
 </TabbedPage>

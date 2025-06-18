@@ -15,6 +15,8 @@ public partial class MenuPrincipal : Microsoft.Maui.Controls.TabbedPage
     }
 
 
+
+
     private void CalcularRisco_Clicked(object sender, EventArgs e)
     {
         bool idadeValida = int.TryParse("0", out int idade);

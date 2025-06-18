@@ -8,6 +8,12 @@
     <ScrollView>
         <VerticalStackLayout Padding="30" Spacing="15" VerticalOptions="CenterAndExpand">
 
+            <Image Source="logo.png" HeightRequest="80" HorizontalOptions="Center" />
+
+            <Image Source="adduser.png" HeightRequest="80" HorizontalOptions="Center" />
+
+
+
             <Label Text="Cadastro de Médico"
                    FontSize="26"
                    FontAttributes="Bold"
@@ -50,6 +56,13 @@
             <Button Text="Cadastrar"
                     Clicked="OnCadastrarClicked"
                     BackgroundColor="#0073C2"
+                    TextColor="White"
+                    CornerRadius="10"
+                    HeightRequest="50"/>
+
+            <Button Text="Voltar para Login"
+                    Clicked="OnVoltarClicked"
+                    BackgroundColor="#595959"
                     TextColor="White"
                     CornerRadius="10"
                     HeightRequest="50"/>
