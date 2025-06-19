@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CardioCheck.QuestionarioPage"
+             Title="Questionário">
+    <ScrollView>
+        <VerticalStackLayout Spacing="10" Padding="20">
+            <Label Text="Formulário de Risco Cardíaco" FontSize="Title" HorizontalOptions="Center" />
+
+            <Entry x:Name="NomePacienteEntry" Placeholder="Nome do Paciente" />
+            <Entry x:Name="IdadeEntry" Placeholder="Idade" Keyboard="Numeric" />
+
+            <Picker x:Name="SexoPicker" Title="Sexo">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Feminino</x:String>
+                        <x:String>Masculino</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <Picker x:Name="TipoDorPeitoPicker" Title="Tipo de Dor no Peito">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>1: Angina Típica</x:String>
+                        <x:String>2: Angina Atípica</x:String>
+                        <x:String>3: Dor Não-anginosa</x:String>
+                        <x:String>4: Assintomático</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <Entry x:Name="PressaoArterialRepousoEntry" Placeholder="Pressão Arterial em Repouso (mm Hg)" Keyboard="Numeric" />
+            <Entry x:Name="ColesterolSericoEntry" Placeholder="Colesterol Sérico (mg/dl)" Keyboard="Numeric" />
+
+            <Picker x:Name="GlicemiaJejumPicker" Title="Glicemia de Jejum > 120 mg/dl">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Não</x:String>
+                        <x:String>Sim</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <Picker x:Name="EletrocardiogramaRepousoPicker" Title="Eletrocardiograma em Repouso">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>0: Normal</x:String>
+                        <x:String>1: Anormalidade da onda ST-T</x:String>
+                        <x:String>2: Hipertrofia ventricular esquerda</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <Entry x:Name="FrequenciaCardiacaMaximaEntry" Placeholder="Frequência Cardíaca Máxima" Keyboard="Numeric" />
+
+            <Picker x:Name="AnginaExercicioPicker" Title="Angina Induzida por Exercício">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Não</x:String>
+                        <x:String>Sim</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <Entry x:Name="OldpeakEntry" Placeholder="Oldpeak (Depressão de ST)" Keyboard="Numeric" />
+
+            <Picker x:Name="InclinacaoSTPicker" Title="Inclinação do Segmento ST">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>0: Normal</x:String>
+                        <x:String>1: Ascendente</x:String>
+                        <x:String>2: Descendente</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+
+            <Button Text="Enviar Questionário" Clicked="OnEnviarQuestionarioClicked" />
+            <Label x:Name="ResultadoLabel" FontSize="Medium" HorizontalTextAlignment="Center" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

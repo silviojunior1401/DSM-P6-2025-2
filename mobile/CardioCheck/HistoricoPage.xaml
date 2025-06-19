@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CardioCheck.HistoricoPage"
+             Title="Histórico">
+    <VerticalStackLayout Spacing="10" Padding="15">
+        <Label 
+            Text="Histórico de Avaliações"
+            FontSize="Title"
+            HorizontalOptions="Center" />
+
+        <CollectionView x:Name="HistoricoCollectionView">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10" Margin="5" BorderColor="LightGray" CornerRadius="5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="{Binding Data, StringFormat='{0:dd/MM/yyyy HH:mm}'}" VerticalOptions="Center"/>
+                            <Label Grid.Column="1" Text="{Binding ResultadoTexto}" TextColor="{Binding ResultadoCor}" FontAttributes="Bold" VerticalOptions="Center"/>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <ActivityIndicator x:Name="LoadingIndicator" IsRunning="False" />
+
+    </VerticalStackLayout>
+</ContentPage>
