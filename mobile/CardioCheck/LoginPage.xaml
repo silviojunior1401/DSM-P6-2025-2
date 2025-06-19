@@ -21,6 +21,7 @@
             <Entry x:Name="UsuarioEntry"
                    Placeholder="E-mail"
                    Keyboard="Email"
+                   Text="doc@gmail.com"
                    BackgroundColor="White"
                    TextColor="Black"/>
 
@@ -28,6 +29,7 @@
             <Entry x:Name="SenhaEntry"
                    Placeholder="Senha"
                    IsPassword="True"
+                   Text="123456"
                    BackgroundColor="White"
                    TextColor="Black"/>
 

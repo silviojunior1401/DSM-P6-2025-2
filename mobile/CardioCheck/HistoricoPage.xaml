@@ -1,32 +1,52 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:CardioCheck.Model"
              x:Class="CardioCheck.HistoricoPage"
-             Title="Histórico">
-    <VerticalStackLayout Spacing="10" Padding="15">
+             Title="Histórico de Avaliações"
+             BackgroundColor="{StaticResource Background}">
+    <Grid RowDefinitions="Auto, *">
         <Label 
             Text="Histórico de Avaliações"
-            FontSize="Title"
-            HorizontalOptions="Center" />
+            FontSize="24"
+            FontFamily="LatoRegular"
+            TextColor="{StaticResource TextPrimary}"
+            Margin="16,16,16,8"/>
 
-        <CollectionView x:Name="HistoricoCollectionView">
+        <ActivityIndicator Grid.Row="1" x:Name="LoadingIndicator" IsRunning="True" VerticalOptions="Center" HorizontalOptions="Center" />
+
+        <CollectionView Grid.Row="1" x:Name="HistoricoCollectionView" ItemsSource="{Binding Historico}">
             <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame Padding="10" Margin="5" BorderColor="LightGray" CornerRadius="5">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <Label Text="{Binding Data, StringFormat='{0:dd/MM/yyyy HH:mm}'}" VerticalOptions="Center"/>
-                            <Label Grid.Column="1" Text="{Binding ResultadoTexto}" TextColor="{Binding ResultadoCor}" FontAttributes="Bold" VerticalOptions="Center"/>
+                <DataTemplate x:DataType="model:Avaliacao">
+                    <Frame Margin="16,8" Padding="16" CornerRadius="12" BorderColor="{StaticResource BorderColor}" BackgroundColor="{StaticResource CardBackground}" HasShadow="False">
+                        <Grid RowDefinitions="Auto, Auto, Auto" ColumnDefinitions="*, Auto">
+
+                            <Label Grid.Row="0" Grid.Column="0" FontFamily="LatoBold" FontSize="18" TextColor="{StaticResource TextPrimary}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Questionario.Nome}"/>
+                                        <Span Text=", "/>
+                                        <Span Text="{Binding Questionario.Age}"/>
+                                        <Span Text=" anos"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <Label 
+                                Grid.Row="0" Grid.Column="1" 
+                                Text="{Binding ResultadoTexto}" 
+                                TextColor="{Binding ResultadoCor}" 
+                                FontFamily="LatoBold" 
+                                FontSize="14"
+                                VerticalOptions="Center"/>
+
+                            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding DataFormatada}" TextColor="{StaticResource TextSecondary}" FontSize="14" Margin="0,4,0,0"/>
+
+                          
                         </Grid>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-
-        <ActivityIndicator x:Name="LoadingIndicator" IsRunning="False" />
-
-    </VerticalStackLayout>
+    </Grid>
 </ContentPage>

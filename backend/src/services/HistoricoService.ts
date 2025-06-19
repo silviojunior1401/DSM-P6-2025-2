@@ -26,6 +26,10 @@ export class HistoricoService {
         return avaliacoes.map((avaliacao) => ({
             data: avaliacao.data,
             resultado: avaliacao.resultado,
+            questionario:{
+                nome: avaliacao.questionario.nome,
+                age: avaliacao.questionario.age,
+            },
         }));
     }
 }

@@ -29,7 +29,7 @@ public partial class QuestionarioPage : ContentPage
             {
                 Nome = NomePacienteEntry.Text,
                 Age = int.Parse(IdadeEntry.Text),
-                Sex = SexoPicker.SelectedIndex,
+                Sex = SexoMasculinoRadio.IsChecked ? 1 : 0,
                 ChestPainType = TipoDorPeitoPicker.SelectedIndex + 1,
                 RestingBloodPressure = float.Parse(PressaoArterialRepousoEntry.Text),
                 SerumCholesterol = float.Parse(ColesterolSericoEntry.Text),
@@ -81,7 +81,6 @@ public partial class QuestionarioPage : ContentPage
                float.TryParse(ColesterolSericoEntry.Text, out _) &&
                float.TryParse(FrequenciaCardiacaMaximaEntry.Text, out _) &&
                float.TryParse(OldpeakEntry.Text, out _) &&
-               SexoPicker.SelectedIndex != -1 &&
                TipoDorPeitoPicker.SelectedIndex != -1 &&
                GlicemiaJejumPicker.SelectedIndex != -1 &&
                EletrocardiogramaRepousoPicker.SelectedIndex != -1 &&

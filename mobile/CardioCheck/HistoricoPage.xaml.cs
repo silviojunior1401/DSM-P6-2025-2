@@ -9,23 +9,31 @@ namespace CardioCheck;
 
 public partial class HistoricoPage : ContentPage
 {
-    public ObservableCollection<Avaliacao> Historico { get; set; } = new();
+    public ObservableCollection<Avaliacao> Historico { get; set; }
 
     public HistoricoPage()
     {
         InitializeComponent();
-        HistoricoCollectionView.ItemsSource = Historico;
+        Historico = new ObservableCollection<Avaliacao>();
+
+        // Define o 'BindingContext' para que o XAML possa encontrar a propriedade 'Historico'
+        // e se ligar a ela. Isso permite que a CollectionView se atualize automaticamente.
+        BindingContext = this;
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
+        // Limpa a lista sempre que a página aparecer para não duplicar itens.
+        Historico.Clear();
         await LoadHistorico();
     }
 
     private async Task LoadHistorico()
     {
         LoadingIndicator.IsRunning = true;
+        HistoricoCollectionView.IsVisible = false; // Esconde a lista enquanto carrega
+
         try
         {
             var httpClient = new HttpClient();
@@ -37,26 +45,45 @@ public partial class HistoricoPage : ContentPage
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                var historicoList = JsonSerializer.Deserialize<List<Avaliacao>>(content);
 
-                Historico.Clear();
-                foreach (var item in historicoList)
+                // PONTO CRÍTICO: A API envia JSON com letras minúsculas (camelCase)
+                // e o nosso modelo C# usa maiúsculas (PascalCase).
+                // Esta opção faz com que o desserializador ignore essa diferença.
+                var options = new JsonSerializerOptions
                 {
-                    Historico.Add(item);
+                    PropertyNameCaseInsensitive = true
+                };
+
+                var historicoList = JsonSerializer.Deserialize<List<Avaliacao>>(content, options);
+
+                if (historicoList != null)
+                {
+                    // Ordena os resultados do mais novo para o mais antigo.
+                    var historicoOrdenado = historicoList.OrderByDescending(item => item.Data);
+                    foreach (var item in historicoOrdenado)
+                    {
+                        Historico.Add(item);
+                    }
                 }
             }
             else
             {
-                await DisplayAlert("Erro", "Não foi possível carregar o histórico.", "OK");
+                await DisplayAlert("Erro de API", "Não foi possível carregar o histórico. O servidor respondeu com um erro.", "OK");
             }
+        }
+        catch (JsonException jsonEx)
+        {
+            // Este erro acontece se o JSON da API não for compatível com o modelo 'Avaliacao.cs'.
+            await DisplayAlert("Erro de Dados", $"O formato dos dados recebidos da API está incorreto. Verifique se o backend foi atualizado para enviar nome e idade do paciente.\n\nDetalhe técnico: {jsonEx.Message}", "OK");
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Erro", $"Ocorreu um erro de conexão: {ex.Message}", "OK");
+            await DisplayAlert("Erro de Conexão", $"Ocorreu um erro geral: {ex.Message}", "OK");
         }
         finally
         {
             LoadingIndicator.IsRunning = false;
+            HistoricoCollectionView.IsVisible = true; // Mostra a lista após o carregamento
         }
     }
 }
