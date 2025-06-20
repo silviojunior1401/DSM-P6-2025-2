@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CardioCheck.QuestionarioPage"
              Title="Questionário"
-             BackgroundColor="{StaticResource White}">
+             BackgroundColor="{StaticResource Gray100}"
+             NavigationPage.HasNavigationBar="False">
+
 
     <ContentPage.Resources>
         <Style x:Key="FormLabelStyle" TargetType="Label">
@@ -45,200 +47,248 @@
         </Style>
     </ContentPage.Resources>
 
-    <ScrollView>
-        <VerticalStackLayout Spacing="16" Padding="25,20">
+        <Grid>
+        <ScrollView x:Name="MainContentScrollView">
+            <VerticalStackLayout Spacing="16" Padding="25,20">
 
-            <Label 
-                Text="Formulário de Risco Cardíaco"
-                FontFamily="LatoBold"
-                FontSize="24"
-                HorizontalOptions="Center"
-                TextColor="{StaticResource Primary}"
-                Margin="0,0,0,20"/>
-            
-           
-            <VerticalStackLayout>
-                <Label Text="Nome do Paciente" Style="{StaticResource FormLabelStyle}" />
-                <Border Style="{StaticResource FormFieldBorderStyle}">
-                    <Entry x:Name="NomePacienteEntry" Placeholder="Digite o nome completo" Style="{StaticResource FormEntryStyle}" />
-                </Border>
-            </VerticalStackLayout>
-
-            <VerticalStackLayout>
-                <Label Text="Idade" Style="{StaticResource FormLabelStyle}" />
-                <Border Style="{StaticResource FormFieldBorderStyle}">
-                    <Entry x:Name="IdadeEntry" Placeholder="Ex: 45" Keyboard="Numeric" Style="{StaticResource FormEntryStyle}"/>
-                </Border>
-            </VerticalStackLayout>
-
-            <VerticalStackLayout>
-                <Label Text="Sexo" Style="{StaticResource FormLabelStyle}" />
-                <HorizontalStackLayout Spacing="20">
-                    <RadioButton x:Name="SexoMasculinoRadio" Content="Masculino" GroupName="Sexo" IsChecked="True" />
-                    <RadioButton x:Name="SexoFemininoRadio" Content="Feminino" GroupName="Sexo" />
-                </HorizontalStackLayout>
-            </VerticalStackLayout>
-
-            <VerticalStackLayout>
-                <Label Text="Tipo de Dor no Peito" Style="{StaticResource FormLabelStyle}" />
-                <Border Style="{StaticResource FormFieldBorderStyle}">
-                    <Picker x:Name="TipoDorPeitoPicker" Title="Selecione o tipo de dor" Style="{StaticResource FormPickerStyle}">
-                        <Picker.ItemsSource>
-                            <x:Array Type="{x:Type x:String}">
-                                <x:String>1: Angina Típica</x:String>
-                                <x:String>2: Angina Atípica</x:String>
-                                <x:String>3: Dor Não-anginosa</x:String>
-                                <x:String>4: Assintomático</x:String>
-                            </x:Array>
-                        </Picker.ItemsSource>
-                    </Picker>
-                </Border>
-            </VerticalStackLayout>
+                <Image Source="logo.png"
+                       HeightRequest="60"
+                       Margin="30,20,30,20"
+                       HorizontalOptions="Center" />
 
 
-            <VerticalStackLayout>
-                <Label Text="Pressão Arterial em Repouso (mm Hg)" Style="{StaticResource FormLabelStyle}" />
-        
-                
-                <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto" RowSpacing="8">
 
-                    <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FormFieldBorderStyle}">
-                        <Entry x:Name="PressaoArterialRepousoEntry" 
-                   Keyboard="Numeric" 
-                   Style="{StaticResource FormEntryStyle}"
-                   Text="{Binding Source={x:Reference PressaoSlider}, Path=Value, StringFormat='{0:F0}'}" />
+                <VerticalStackLayout>
+                    <Label Text="Nome do Paciente" Style="{StaticResource FormLabelStyle}" />
+                    <Border Style="{StaticResource FormFieldBorderStyle}">
+                        <Entry x:Name="NomePacienteEntry" Placeholder="Digite o nome completo" Style="{StaticResource FormEntryStyle}" />
                     </Border>
+                </VerticalStackLayout>
 
-                    
-                    <BoxView Grid.Row="1" Grid.Column="0"
-                 HeightRequest="2" 
-                 CornerRadius="4"
-                 VerticalOptions="Center">
-                        <BoxView.Background>
-                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                <GradientStop Color="#DC3545" Offset="0.0" />
-                                <GradientStop Color="#FFC107" Offset="0.15" />
-                                <GradientStop Color="#28A745" Offset="0.3" />
-                                <GradientStop Color="#FFC107" Offset="0.5" />
-                                <GradientStop Color="#DC3545" Offset="1.0" />
-                            </LinearGradientBrush>
-                        </BoxView.Background>
-                    </BoxView>
+                <VerticalStackLayout>
+                    <Label Text="Idade" Style="{StaticResource FormLabelStyle}" />
+                    <Border Style="{StaticResource FormFieldBorderStyle}">
+                        <Entry x:Name="IdadeEntry" Placeholder="Ex: 45" Keyboard="Numeric" Style="{StaticResource FormEntryStyle}"/>
+                    </Border>
+                </VerticalStackLayout>
 
-                    <Slider x:Name="PressaoSlider"
-                Grid.Row="1"
-                Grid.Column="0"
-                Minimum="70" 
-                Maximum="220"
-                Value="120"
-                Scale="1"
-                MinimumTrackColor="Transparent"
-                MaximumTrackColor="Transparent"
-                ThumbColor="{StaticResource White}" />
+                <VerticalStackLayout>
+                    <Label Text="Sexo" Style="{StaticResource FormLabelStyle}" />
+                    <HorizontalStackLayout Spacing="20">
+                        <RadioButton x:Name="SexoMasculinoRadio" Content="Masculino" GroupName="Sexo" IsChecked="True" />
+                        <RadioButton x:Name="SexoFemininoRadio" Content="Feminino" GroupName="Sexo" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
 
-                    
+                <VerticalStackLayout>
+                    <Label Text="Tipo de Dor no Peito" Style="{StaticResource FormLabelStyle}" />
+                    <Border Style="{StaticResource FormFieldBorderStyle}">
+                        <Picker x:Name="TipoDorPeitoPicker" Title="Selecione o tipo de dor" Style="{StaticResource FormPickerStyle}">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>1: Angina Típica</x:String>
+                                    <x:String>2: Angina Atípica</x:String>
+                                    <x:String>3: Dor Não-anginosa</x:String>
+                                    <x:String>4: Assintomático</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+                    </Border>
+                </VerticalStackLayout>
 
-                    <Label Grid.Row="1" 
-               Grid.Column="1" 
-               Text="{Binding Source={x:Reference PressaoSlider}, Path=Value, StringFormat='{0:F0}'}"
-               VerticalOptions="Center"
-               FontFamily="LatoBold"
-               TextColor="{StaticResource Primary}"
-               WidthRequest="40"
-               HorizontalTextAlignment="Center"/>
+
+                <VerticalStackLayout>
+                    <Label Text="Pressão Arterial em Repouso (mm Hg)" Style="{StaticResource FormLabelStyle}" />
+
+                    <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto" RowSpacing="8">
+
+                        <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FormFieldBorderStyle}">
+                            <Entry x:Name="PressaoArterialRepousoEntry" 
+                           Keyboard="Numeric" 
+                           Style="{StaticResource FormEntryStyle}"
+                           Text="{Binding Source={x:Reference PressaoSlider}, Path=Value, StringFormat='{0:F0}'}" />
+                        </Border>
+
+
+                        <BoxView Grid.Row="1" Grid.Column="0"
+                               HeightRequest="2" 
+                               CornerRadius="4"
+                               VerticalOptions="Center">
+                            <BoxView.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                    <GradientStop Color="#DC3545" Offset="0.0" />
+                                    <GradientStop Color="#FFC107" Offset="0.15" />
+                                    <GradientStop Color="#28A745" Offset="0.3" />
+                                    <GradientStop Color="#FFC107" Offset="0.5" />
+                                    <GradientStop Color="#DC3545" Offset="1.0" />
+                                </LinearGradientBrush>
+                            </BoxView.Background>
+                        </BoxView>
+
+                        <Slider x:Name="PressaoSlider"
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Minimum="70" 
+                                Maximum="220"
+                                Value="120"
+                                Scale="1"
+                                MinimumTrackColor="Transparent"
+                                MaximumTrackColor="Transparent"
+                                ThumbColor="{StaticResource White}" />
+
+                        <Label Grid.Row="1" 
+                               Grid.Column="1" 
+                               Text="{Binding Source={x:Reference PressaoSlider}, Path=Value, StringFormat='{0:F0}'}"
+                               VerticalOptions="Center"
+                               FontFamily="LatoBold"
+                               TextColor="{StaticResource Primary}"
+                               WidthRequest="40"
+                               HorizontalTextAlignment="Center"/>
+                    </Grid>
+                </VerticalStackLayout>
+
+
+
+
+                <VerticalStackLayout>
+                    <Label Text="Colesterol Sérico (mg/dl)" Style="{StaticResource FormLabelStyle}" />
+                    <Border Style="{StaticResource FormFieldBorderStyle}">
+                        <Entry x:Name="ColesterolSericoEntry" Placeholder="Ex: 200" Keyboard="Numeric" Style="{StaticResource FormEntryStyle}"/>
+                    </Border>
+                </VerticalStackLayout>
+
+
+
+                <Grid ColumnDefinitions="*, Auto, Auto" 
+                      ColumnSpacing="15"
+                      VerticalOptions="Center">
+
+                    <Label Grid.Column="0"
+                           Text="Glicemia em Jejum > 120 mg/dl" 
+                           Style="{StaticResource FormLabelStyle}" 
+                           VerticalOptions="Center"
+                           Margin="0" />
+
+                    <Switch Grid.Column="1"
+                            x:Name="GlicemiaSwitch"
+                            IsToggled="False" 
+                            Toggled="OnGlicemiaSwitchToggled"
+                            VerticalOptions="Center"/>
+
+                    <Label Grid.Column="2"
+                           x:Name="GlicemiaLabel" 
+                           Text="Não" 
+                           VerticalOptions="Center" 
+                           FontSize="16" 
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource Gray600}"/>
+
                 </Grid>
+
+
+                <VerticalStackLayout>
+                    <Label Text="Eletrocardiograma em Repouso" Style="{StaticResource FormLabelStyle}" />
+                    <Border Style="{StaticResource FormFieldBorderStyle}">
+                        <Picker x:Name="EletrocardiogramaRepousoPicker" Title="Selecione o resultado" Style="{StaticResource FormPickerStyle}">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>0: Normal</x:String>
+                                    <x:String>1: Anormalidade da onda ST-T</x:String>
+                                    <x:String>2: Hipertrofia ventricular esquerda</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+                    </Border>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout>
+                    <Label Text="Frequência Cardíaca Máxima Atingida" Style="{StaticResource FormLabelStyle}" />
+                    <Border Style="{StaticResource FormFieldBorderStyle}">
+                        <Entry x:Name="FrequenciaCardiacaMaximaEntry" Placeholder="Ex: 150" Keyboard="Numeric" Style="{StaticResource FormEntryStyle}"/>
+                    </Border>
+                </VerticalStackLayout>
+
+
+
+                <Grid ColumnDefinitions="*, Auto, Auto" 
+                  ColumnSpacing="15"
+                  VerticalOptions="Center">
+
+                    <Label Grid.Column="0"
+                       Text="Angina Induzida por Exercício" 
+                       Style="{StaticResource FormLabelStyle}" 
+                       VerticalOptions="Center"
+                       Margin="0" />
+
+                    <Switch Grid.Column="1"
+                        x:Name="AnginaExercicioSwitch"
+                        IsToggled="False" 
+                        Toggled="OnAnginaSwitchToggled"
+                        VerticalOptions="Center"/>
+
+                    <Label Grid.Column="2"
+                       x:Name="AnginaExercicioLabel" 
+                       Text="Não" 
+                       VerticalOptions="Center" 
+                       FontSize="16" 
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource Gray600}"/>
+
+                </Grid>
+
+
+
+                <VerticalStackLayout>
+                    <Label Text="Oldpeak (Depressão de ST induzida por exercício)" Style="{StaticResource FormLabelStyle}" />
+                    <Border Style="{StaticResource FormFieldBorderStyle}">
+                        <Entry x:Name="OldpeakEntry" Placeholder="Ex: 1.0" Keyboard="Numeric" Style="{StaticResource FormEntryStyle}"/>
+                    </Border>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout>
+                    <Label Text="Inclinação do Pico do Segmento ST" Style="{StaticResource FormLabelStyle}" />
+                    <Border Style="{StaticResource FormFieldBorderStyle}">
+                        <Picker x:Name="InclinacaoSTPicker" Title="Selecione a inclinação" Style="{StaticResource FormPickerStyle}">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>0: Normal</x:String>
+                                    <x:String>1: Ascendente</x:String>
+                                    <x:String>2: Descendente</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+                    </Border>
+                </VerticalStackLayout>
+
+                <Button 
+                    Text="Analisar Risco Cardíaco" 
+                    Clicked="OnEnviarQuestionarioClicked"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    Margin="0,20,0,0"/>
+
+                <Label x:Name="ResultadoLabel" FontSize="Medium" HorizontalTextAlignment="Center" Margin="0,10,0,0"/>
+
             </VerticalStackLayout>
+        </ScrollView>
 
+        <Grid x:Name="LoaderGrid" 
+              IsVisible="False" 
+              BackgroundColor="#80000000" 
+              HorizontalOptions="FillAndExpand" 
+              VerticalOptions="FillAndExpand">
 
+            <VerticalStackLayout VerticalOptions="Center" 
+                                 HorizontalOptions="Center" 
+                                 Spacing="10">
 
-
-            <VerticalStackLayout>
-                <Label Text="Colesterol Sérico (mg/dl)" Style="{StaticResource FormLabelStyle}" />
-                <Border Style="{StaticResource FormFieldBorderStyle}">
-                    <Entry x:Name="ColesterolSericoEntry" Placeholder="Ex: 200" Keyboard="Numeric" Style="{StaticResource FormEntryStyle}"/>
-                </Border>
+                <ActivityIndicator IsRunning="True" Color="{StaticResource White}" />
+                <Label Text="Analisando os dados, aguarde..."
+                       TextColor="{StaticResource White}"
+                       HorizontalOptions="Center"
+                       FontFamily="LatoBold"/>
             </VerticalStackLayout>
+        </Grid>
+    </Grid>
 
-            <VerticalStackLayout>
-                <Label Text="Glicemia de Jejum > 120 mg/dl" Style="{StaticResource FormLabelStyle}" />
-                <Border Style="{StaticResource FormFieldBorderStyle}">
-                    <Picker x:Name="GlicemiaJejumPicker" Title="Selecione uma opção" Style="{StaticResource FormPickerStyle}">
-                        <Picker.ItemsSource>
-                            <x:Array Type="{x:Type x:String}">
-                                <x:String>Não</x:String>
-                                <x:String>Sim</x:String>
-                            </x:Array>
-                        </Picker.ItemsSource>
-                    </Picker>
-                </Border>
-            </VerticalStackLayout>
 
-            <VerticalStackLayout>
-                <Label Text="Eletrocardiograma em Repouso" Style="{StaticResource FormLabelStyle}" />
-                <Border Style="{StaticResource FormFieldBorderStyle}">
-                    <Picker x:Name="EletrocardiogramaRepousoPicker" Title="Selecione o resultado" Style="{StaticResource FormPickerStyle}">
-                        <Picker.ItemsSource>
-                            <x:Array Type="{x:Type x:String}">
-                                <x:String>0: Normal</x:String>
-                                <x:String>1: Anormalidade da onda ST-T</x:String>
-                                <x:String>2: Hipertrofia ventricular esquerda</x:String>
-                            </x:Array>
-                        </Picker.ItemsSource>
-                    </Picker>
-                </Border>
-            </VerticalStackLayout>
-
-            <VerticalStackLayout>
-                <Label Text="Frequência Cardíaca Máxima Atingida" Style="{StaticResource FormLabelStyle}" />
-                <Border Style="{StaticResource FormFieldBorderStyle}">
-                    <Entry x:Name="FrequenciaCardiacaMaximaEntry" Placeholder="Ex: 150" Keyboard="Numeric" Style="{StaticResource FormEntryStyle}"/>
-                </Border>
-            </VerticalStackLayout>
-
-            <VerticalStackLayout>
-                <Label Text="Angina Induzida por Exercício" Style="{StaticResource FormLabelStyle}" />
-                <Border Style="{StaticResource FormFieldBorderStyle}">
-                    <Picker x:Name="AnginaExercicioPicker" Title="Selecione uma opção" Style="{StaticResource FormPickerStyle}">
-                        <Picker.ItemsSource>
-                            <x:Array Type="{x:Type x:String}">
-                                <x:String>Não</x:String>
-                                <x:String>Sim</x:String>
-                            </x:Array>
-                        </Picker.ItemsSource>
-                    </Picker>
-                </Border>
-            </VerticalStackLayout>
-
-            <VerticalStackLayout>
-                <Label Text="Oldpeak (Depressão de ST induzida por exercício)" Style="{StaticResource FormLabelStyle}" />
-                <Border Style="{StaticResource FormFieldBorderStyle}">
-                    <Entry x:Name="OldpeakEntry" Placeholder="Ex: 1.0" Keyboard="Numeric" Style="{StaticResource FormEntryStyle}"/>
-                </Border>
-            </VerticalStackLayout>
-
-            <VerticalStackLayout>
-                <Label Text="Inclinação do Pico do Segmento ST" Style="{StaticResource FormLabelStyle}" />
-                <Border Style="{StaticResource FormFieldBorderStyle}">
-                    <Picker x:Name="InclinacaoSTPicker" Title="Selecione a inclinação" Style="{StaticResource FormPickerStyle}">
-                        <Picker.ItemsSource>
-                            <x:Array Type="{x:Type x:String}">
-                                <x:String>0: Normal</x:String>
-                                <x:String>1: Ascendente</x:String>
-                                <x:String>2: Descendente</x:String>
-                            </x:Array>
-                        </Picker.ItemsSource>
-                    </Picker>
-                </Border>
-            </VerticalStackLayout>
-
-            <Button 
-                Text="Analisar Risco Cardíaco" 
-                Clicked="OnEnviarQuestionarioClicked"
-                Style="{StaticResource PrimaryButtonStyle}"
-                Margin="0,20,0,0"/>
-
-            <Label x:Name="ResultadoLabel" FontSize="Medium" HorizontalTextAlignment="Center" Margin="0,10,0,0"/>
-
-        </VerticalStackLayout>
-    </ScrollView>
 </ContentPage>

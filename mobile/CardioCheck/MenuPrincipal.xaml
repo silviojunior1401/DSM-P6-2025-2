@@ -2,9 +2,15 @@
 <TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:local="clr-namespace:CardioCheck"
-            x:Class="CardioCheck.MenuPrincipal">
+            x:Class="CardioCheck.MenuPrincipal"
+            BarBackgroundColor="{StaticResource White}"
+            BarTextColor="{StaticResource Primary}"
+            SelectedTabColor="{StaticResource Primary}"
+            UnselectedTabColor="{StaticResource Gray500}">
 
-    <local:QuestionarioPage Title="Questionário" IconImageSource="home.png" />
-    <local:HistoricoPage Title="Histórico" IconImageSource="heartrate.png" />
+
+    <local:HomePage Title="Início" IconImageSource="homepage.png" />
+    <local:QuestionarioPage Title="CardioCheck" IconImageSource="heartcheck.png" />
+    <local:HistoricoPage Title="Histórico" IconImageSource="history.png" />
 
 </TabbedPage>

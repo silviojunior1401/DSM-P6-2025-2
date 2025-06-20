@@ -4,14 +4,21 @@
              xmlns:model="clr-namespace:CardioCheck.Model"
              x:Class="CardioCheck.HistoricoPage"
              Title="Histórico de Avaliações"
-             BackgroundColor="{StaticResource Background}">
+             BackgroundColor="{StaticResource Background}"
+             NavigationPage.HasNavigationBar="False">
+
     <Grid RowDefinitions="Auto, *">
+
+        <Image Source="logo.png"
+                       HeightRequest="40"
+                       Margin="50,20,50,50"
+                       HorizontalOptions="Center" />
         <Label 
             Text="Histórico de Avaliações"
-            FontSize="24"
-            FontFamily="LatoRegular"
+            FontSize="22"
+            FontFamily="LatoBold"
             TextColor="{StaticResource TextPrimary}"
-            Margin="16,16,16,8"/>
+            Margin="25,100,16,8"/>
 
         <ActivityIndicator Grid.Row="1" x:Name="LoadingIndicator" IsRunning="True" VerticalOptions="Center" HorizontalOptions="Center" />
 
