@@ -42,13 +42,6 @@
                        Margin="30,20,30,0"
                        HorizontalOptions="Center" />
 
-                <Label Text="Bem-vindo(a)"
-                       TextColor="White"
-                       FontSize="32"
-                       FontFamily="LatoBold"
-                       HorizontalTextAlignment="Center"
-                       LineHeight="1.2"/>
-
                 <!-- Card de Propósito -->
                 <Border StrokeShape="RoundRectangle 20"
                         Padding="40"
@@ -72,10 +65,11 @@
                                Margin="0,-10,0,0"/>
 
                         <Label Text="Apoiando a sua decisão!"
-                               TextColor="{StaticResource Primary}"
-                               FontFamily="LatoBold"
-                               FontSize="20"
+                               TextColor="{StaticResource SecondaryDarkText}"
+                               FontFamily="Pacifico"
+                               FontSize="27"
                                HorizontalOptions="Center"/>
+                       
                         <Label TextColor="Gray"
                                FontSize="18"
                                LineHeight="1.4"

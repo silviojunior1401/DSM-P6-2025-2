@@ -3,64 +3,89 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CardioCheck.LoginPage"
              Title="Login"
-             BackgroundColor="#F2F2F2">
+             NavigationPage.HasNavigationBar="False">
 
-    <ScrollView>
-        <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="CenterAndExpand">
+    <ContentPage.Resources>
+        <Style x:Key="TranslucentEntryStyle" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="#40FFFFFF" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 30,30,30,30" />
+            <Setter Property="StrokeThickness" Value="0" />
+            <Setter Property="Padding" Value="15,0" />
+            <Setter Property="HeightRequest" Value="55" />
+        </Style>
+    </ContentPage.Resources>
 
-            <Image Source="logo.png" HeightRequest="80" HorizontalOptions="Center" />
+    <Grid>
 
- 
+        <Image 
+            Source="fundo.png" 
+            Aspect="AspectFill" />
 
-            <Label Text="Acesse sua conta"
-                   FontSize="18"
-                   HorizontalOptions="Center"
-                   TextColor="Gray"/>
+       
 
-            <!-- Entrada de email -->
-            <Entry x:Name="UsuarioEntry"
-                   Placeholder="E-mail"
-                   Keyboard="Email"
-                   Text="doc@gmail.com"
-                   BackgroundColor="White"
-                   TextColor="Black"/>
+        <ScrollView>
+            <VerticalStackLayout Padding="30" Spacing="15" VerticalOptions="CenterAndExpand">
 
-            <!-- Entrada de senha -->
-            <Entry x:Name="SenhaEntry"
-                   Placeholder="Senha"
-                   IsPassword="True"
-                   Text="123456"
-                   BackgroundColor="White"
-                   TextColor="Black"/>
+                <Image Source="logo.png" HeightRequest="80" HorizontalOptions="Center" Margin="0,0,0,20"/>
 
-            <!-- Mensagem de erro -->
-            <Label x:Name="MensagemErro"
-                   TextColor="Red"
-                   FontSize="14"
-                   HorizontalOptions="Center"/>
+                <Label Text="Acesse sua conta"
+                       FontSize="18"
+                       HorizontalOptions="Center"
+                       TextColor="White"/>
 
-            <!-- Botão de login -->
-            <Button Text="Entrar"
-                    Clicked="OnEntrarClicked"
-                    BackgroundColor="#0073C2"
-                    TextColor="White"
-                    CornerRadius="10"
-                    HeightRequest="50"/>
+                <Border Style="{StaticResource TranslucentEntryStyle}">
+                    <Entry x:Name="UsuarioEntry"
+                           Placeholder="E-mail"
+                           Keyboard="Email"
+                           FontSize="15"
+                           Text="doc@gmail.com"
+                           TextColor="Black"
+                           PlaceholderColor="#E0E0E0"
+                           BackgroundColor="Transparent"
+                           VerticalOptions="Center"/>
+                </Border>
 
-            <!-- Botão de cadastro -->
-            <Button Text="Cadastrar Médico"
-                    Clicked="OnCadastrarClicked"
-                    BackgroundColor="#595959"
-                    TextColor="White"
-                    CornerRadius="10"
-                    HeightRequest="50"/>
+                <Border Style="{StaticResource TranslucentEntryStyle}">
+                    <Entry x:Name="SenhaEntry"
+                           Placeholder="Senha"
+                           IsPassword="True"
+                           FontSize="15"
+                           Text="123456"
+                           TextColor="Black"
+                           PlaceholderColor="#E0E0E0"
+                           BackgroundColor="Transparent"
+                           VerticalOptions="Center"/>
+                </Border>
 
-            <!-- Rodapé -->
-            <Label Text="Versão 1.0"
-                   FontSize="12"
-                   HorizontalOptions="Center"
-                   TextColor="Gray"/>
+                <Label x:Name="MensagemErro"
+                       TextColor="Red"
+                       FontSize="14"
+                       HorizontalOptions="Center"
+                       FontAttributes="Bold"/>
 
-        </VerticalStackLayout>
-    </ScrollView>
+                <Button Text="Entrar"
+                        Clicked="OnEntrarClicked"
+                        BackgroundColor="DodgerBlue"
+                        TextColor="White"
+                        CornerRadius="28"
+                        HeightRequest="55"
+                        FontAttributes="Bold"
+                        Margin="0,10,0,0"/>
+
+                <Button Text="Cadastrar Médico"
+                        Clicked="OnCadastrarClicked"
+                        BackgroundColor="#595959"
+                        TextColor="White"
+                        CornerRadius="28"
+                        HeightRequest="55"/>
+
+                <Label Text="Versão 1.0"
+                       FontSize="12"
+                       HorizontalOptions="Center"
+                       TextColor="#CCCCCC"
+                       Margin="0,20,0,0"/>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

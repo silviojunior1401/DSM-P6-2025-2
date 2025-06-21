@@ -4,7 +4,8 @@
              x:Class="CardioCheck.ResultadoPage"
              Title="Resultado da Análise"
              NavigationPage.HasBackButton="False"
-             BackgroundColor="{StaticResource White}">
+             BackgroundColor="{StaticResource White}"
+             NavigationPage.HasNavigationBar="False">
 
     <ContentPage.Resources>
         <Style x:Key="ResultSummaryLabel" TargetType="Label">
@@ -21,86 +22,113 @@
             <Setter Property="HorizontalOptions" Value="End" />
             <Setter Property="VerticalOptions" Value="Center"/>
         </Style>
+
+        <Style x:Key="DottedSeparator" TargetType="BoxView">
+            <Setter Property="HeightRequest" Value="1"/>
+            <Setter Property="Color" Value="{StaticResource Gray200}"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="Margin" Value="8,0"/>
+        </Style>
     </ContentPage.Resources>
 
     <ScrollView>
         <VerticalStackLayout Spacing="15" Padding="25">
 
-            <Border x:Name="ResultadoBorder"
-                    StrokeThickness="2"
-                    Padding="20"
-                    Margin="0,10,0,15"
-                    StrokeShape="RoundRectangle 10"
-                    BackgroundColor="{StaticResource Gray100}">
-                <VerticalStackLayout Spacing="10">
-                    <Label Text="Resultado da Análise"
-                           FontSize="20"
-                           FontFamily="LatoBold"
-                           HorizontalOptions="Center"
-                           TextColor="{StaticResource Gray900}"/>
+            <Border x:Name="ResultadoBorder" StrokeThickness="0" Padding="0" Margin="0,10,0,15" StrokeShape="RoundRectangle 15" BackgroundColor="{StaticResource Gray100}">
+                <VerticalStackLayout Spacing="15" Padding="25,20">
 
-                    <Label x:Name="ResultadoPredicaoLabel"
-                           FontSize="32"
-                           FontAttributes="Bold"
-                           HorizontalOptions="Center" />
+                    <Border x:Name="ResultadoIconCircle" HeightRequest="90" WidthRequest="90" StrokeShape="Ellipse" HorizontalOptions="Center">
+                        <Image x:Name="ResultadoIcon" HeightRequest="45" WidthRequest="45" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="Center" />
+                    </Border>
+
+                    <Label x:Name="ResultadoPredicaoLabel" FontSize="28" FontFamily="LatoBold" HorizontalOptions="Center" />
 
                     <Label x:Name="ResultadoRecomendacaoLabel"
                            FontSize="16"
-                           HorizontalOptions="Center"
                            HorizontalTextAlignment="Center"
-                           TextColor="{StaticResource Gray600}"/>
+                           TextColor="{StaticResource Gray600}"
+                           LineHeight="1.4"/>
                 </VerticalStackLayout>
             </Border>
 
-            <Label Text="Resumo dos Dados"
+            <Label Text="Resumo dos Dados Enviados"
                    FontSize="20"
                    FontFamily="LatoBold"
                    TextColor="{StaticResource Primary}"
                    Margin="0,10,0,5"/>
 
-            <Grid ColumnDefinitions="Auto, *" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto" RowSpacing="12">
+            <Grid ColumnDefinitions="Auto, *, Auto" RowSpacing="14">
 
-                <Label Grid.Row="0" Grid.Column="0" Text="Nome:" Style="{StaticResource ResultSummaryLabel}" />
-                <Label x:Name="NomeLabel" Grid.Row="0" Grid.Column="1" Style="{StaticResource ResultSummaryValue}" />
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-                <Label Grid.Row="1" Grid.Column="0" Text="Idade:" Style="{StaticResource ResultSummaryLabel}" />
-                <Label x:Name="IdadeLabel" Grid.Row="1" Grid.Column="1" Style="{StaticResource ResultSummaryValue}" />
 
-                <Label Grid.Row="2" Grid.Column="0" Text="Sexo:" Style="{StaticResource ResultSummaryLabel}" />
-                <Label x:Name="SexoLabel" Grid.Row="2" Grid.Column="1" Style="{StaticResource ResultSummaryValue}" />
+                <Label Grid.Row="0" Grid.Column="0" Text="Nome do Paciente" Style="{StaticResource ResultSummaryLabel}" />
+                <BoxView Grid.Row="0" Grid.Column="1" Style="{StaticResource DottedSeparator}" />
+                <Label x:Name="NomeLabel" Grid.Row="0" Grid.Column="2" Style="{StaticResource ResultSummaryValue}" />
 
-                <Label Grid.Row="3" Grid.Column="0" Text="Dor no Peito:" Style="{StaticResource ResultSummaryLabel}" />
-                <Label x:Name="DorPeitoLabel" Grid.Row="3" Grid.Column="1" Style="{StaticResource ResultSummaryValue}" />
+                <Label Grid.Row="1" Grid.Column="0" Text="Idade" Style="{StaticResource ResultSummaryLabel}" />
+                <BoxView Grid.Row="1" Grid.Column="1" Style="{StaticResource DottedSeparator}" />
+                <Label x:Name="IdadeLabel" Grid.Row="1" Grid.Column="2" Style="{StaticResource ResultSummaryValue}" />
 
-                <Label Grid.Row="4" Grid.Column="0" Text="Pressão Arterial:" Style="{StaticResource ResultSummaryLabel}" />
-                <Label x:Name="PressaoLabel" Grid.Row="4" Grid.Column="1" Style="{StaticResource ResultSummaryValue}" />
+                <Label Grid.Row="2" Grid.Column="0" Text="Sexo" Style="{StaticResource ResultSummaryLabel}" />
+                <BoxView Grid.Row="2" Grid.Column="1" Style="{StaticResource DottedSeparator}" />
+                <Label x:Name="SexoLabel" Grid.Row="2" Grid.Column="2" Style="{StaticResource ResultSummaryValue}" />
 
-                <Label Grid.Row="5" Grid.Column="0" Text="Colesterol:" Style="{StaticResource ResultSummaryLabel}" />
-                <Label x:Name="ColesterolLabel" Grid.Row="5" Grid.Column="1" Style="{StaticResource ResultSummaryValue}" />
+                <Label Grid.Row="3" Grid.Column="0" Text="Dor no Peito" Style="{StaticResource ResultSummaryLabel}" />
+                <BoxView Grid.Row="3" Grid.Column="1" Style="{StaticResource DottedSeparator}" />
+                <Label x:Name="DorPeitoLabel" Grid.Row="3" Grid.Column="2" Style="{StaticResource ResultSummaryValue}" />
 
-                <Label Grid.Row="6" Grid.Column="0" Text="Glicemia > 120:" Style="{StaticResource ResultSummaryLabel}" />
-                <Label x:Name="GlicemiaLabel" Grid.Row="6" Grid.Column="1" Style="{StaticResource ResultSummaryValue}" />
+                <Label Grid.Row="4" Grid.Column="0" Text="Pressão Arterial" Style="{StaticResource ResultSummaryLabel}" />
+                <BoxView Grid.Row="4" Grid.Column="1" Style="{StaticResource DottedSeparator}" />
+                <Label x:Name="PressaoLabel" Grid.Row="4" Grid.Column="2" Style="{StaticResource ResultSummaryValue}" />
 
-                <Label Grid.Row="7" Grid.Column="0" Text="ECG em Repouso:" Style="{StaticResource ResultSummaryLabel}" />
-                <Label x:Name="EcgLabel" Grid.Row="7" Grid.Column="1" Style="{StaticResource ResultSummaryValue}" />
+                <Label Grid.Row="5" Grid.Column="0" Text="Colesterol" Style="{StaticResource ResultSummaryLabel}" />
+                <BoxView Grid.Row="5" Grid.Column="1" Style="{StaticResource DottedSeparator}" />
+                <Label x:Name="ColesterolLabel" Grid.Row="5" Grid.Column="2" Style="{StaticResource ResultSummaryValue}" />
 
-                <Label Grid.Row="8" Grid.Column="0" Text="Freq. Card. Máx.:" Style="{StaticResource ResultSummaryLabel}" />
-                <Label x:Name="FreqCardiacaLabel" Grid.Row="8" Grid.Column="1" Style="{StaticResource ResultSummaryValue}" />
+                <Label Grid.Row="6" Grid.Column="0" Text="Glicemia > 120" Style="{StaticResource ResultSummaryLabel}" />
+                <BoxView Grid.Row="6" Grid.Column="1" Style="{StaticResource DottedSeparator}" />
+                <Label x:Name="GlicemiaLabel" Grid.Row="6" Grid.Column="2" Style="{StaticResource ResultSummaryValue}" />
 
-                <Label Grid.Row="9" Grid.Column="0" Text="Angina por Exerc.:" Style="{StaticResource ResultSummaryLabel}" />
-                <Label x:Name="AnginaExercicioLabel" Grid.Row="9" Grid.Column="1" Style="{StaticResource ResultSummaryValue}" />
+                <Label Grid.Row="7" Grid.Column="0" Text="ECG em Repouso" Style="{StaticResource ResultSummaryLabel}" />
+                <BoxView Grid.Row="7" Grid.Column="1" Style="{StaticResource DottedSeparator}" />
+                <Label x:Name="EcgLabel" Grid.Row="7" Grid.Column="2" Style="{StaticResource ResultSummaryValue}" />
 
-                <Label Grid.Row="10" Grid.Column="0" Text="Oldpeak:" Style="{StaticResource ResultSummaryLabel}" />
-                <Label x:Name="OldpeakLabel" Grid.Row="10" Grid.Column="1" Style="{StaticResource ResultSummaryValue}" />
+                <Label Grid.Row="8" Grid.Column="0" Text="Freq. Card. Máx." Style="{StaticResource ResultSummaryLabel}" />
+                <BoxView Grid.Row="8" Grid.Column="1" Style="{StaticResource DottedSeparator}" />
+                <Label x:Name="FreqCardiacaLabel" Grid.Row="8" Grid.Column="2" Style="{StaticResource ResultSummaryValue}" />
 
-                <Label Grid.Row="11" Grid.Column="0" Text="Inclinação ST:" Style="{StaticResource ResultSummaryLabel}" />
-                <Label x:Name="InclinacaoStLabel" Grid.Row="11" Grid.Column="1" Style="{StaticResource ResultSummaryValue}" />
+                <Label Grid.Row="9" Grid.Column="0" Text="Angina por Exerc." Style="{StaticResource ResultSummaryLabel}" />
+                <BoxView Grid.Row="9" Grid.Column="1" Style="{StaticResource DottedSeparator}" />
+                <Label x:Name="AnginaExercicioLabel" Grid.Row="9" Grid.Column="2" Style="{StaticResource ResultSummaryValue}" />
+
+                <Label Grid.Row="10" Grid.Column="0" Text="Oldpeak" Style="{StaticResource ResultSummaryLabel}" />
+                <BoxView Grid.Row="10" Grid.Column="1" Style="{StaticResource DottedSeparator}" />
+                <Label x:Name="OldpeakLabel" Grid.Row="10" Grid.Column="2" Style="{StaticResource ResultSummaryValue}" />
+
+                <Label Grid.Row="11" Grid.Column="0" Text="Inclinação ST" Style="{StaticResource ResultSummaryLabel}" />
+                <BoxView Grid.Row="11" Grid.Column="1" Style="{StaticResource DottedSeparator}" />
+                <Label x:Name="InclinacaoStLabel" Grid.Row="11" Grid.Column="2" Style="{StaticResource ResultSummaryValue}" />
             </Grid>
 
-            <Button Text="Finalizar"
+            <Button Text="Finalizar e Voltar"
                     Clicked="OnFinalizarClicked"
                     Style="{StaticResource PrimaryButtonStyle}"
-                    Margin="0,20,0,0"/>
+                    Margin="0,25,0,0"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

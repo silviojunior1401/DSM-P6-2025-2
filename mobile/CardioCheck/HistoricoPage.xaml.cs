@@ -28,6 +28,7 @@ public partial class HistoricoPage : ContentPage
         Historico.Clear();
         await LoadHistorico();
     }
+    
 
     private async Task LoadHistorico()
     {

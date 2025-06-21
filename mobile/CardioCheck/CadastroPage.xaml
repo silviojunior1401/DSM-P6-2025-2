@@ -55,7 +55,7 @@
 
             <Button Text="Cadastrar"
                     Clicked="OnCadastrarClicked"
-                    BackgroundColor="#0073C2"
+                    BackgroundColor="DodgerBlue"
                     TextColor="White"
                     CornerRadius="10"
                     HeightRequest="50"/>

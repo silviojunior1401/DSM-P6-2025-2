@@ -46,7 +46,10 @@ public partial class ResultadoPage : ContentPage
 
     private async void OnFinalizarClicked(object sender, EventArgs e)
     {
-        // O PopToRootAsync volta para a primeira página da pilha de navegação.
+        // 1. Envia a mensagem para quem estiver ouvindo (neste caso, a QuestionarioPage)
+        MessagingCenter.Send<object>(this, "LimparFormulario");
+
+        // 2. Navega de volta para a tela raiz do aplicativo (a tela de abas)
         await Navigation.PopToRootAsync();
     }
 }

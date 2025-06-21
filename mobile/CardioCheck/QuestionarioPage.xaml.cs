@@ -12,6 +12,11 @@ public partial class QuestionarioPage : ContentPage
     public QuestionarioPage()
     {
         InitializeComponent();
+
+        MessagingCenter.Subscribe<object>(this, "LimparFormulario", async (sender) => // Adiciona o "async" aqui
+        {
+            await ClearForm(); // Agora o await funciona
+        });
     }
     private void OnAnginaSwitchToggled(object sender, ToggledEventArgs e)
     {
@@ -40,6 +45,18 @@ public partial class QuestionarioPage : ContentPage
             GlicemiaLabel.Text = "Não";
             GlicemiaLabel.TextColor = Colors.Gray;
         }
+    }
+
+    private async void OnInfoInclinacaoSTTapped(object sender, TappedEventArgs e)
+    {
+        await DisplayAlert(
+            "Inclinação do Pico do Segmento ST", // Título do Pop-up
+            "Este campo descreve a inclinação do segmento ST no eletrocardiograma durante o pico do exercício.\n\n" +
+            "• Normal (Flat): Risco intermediário.\n\n" +
+            "• Ascendente (Upsloping): Geralmente considerado de baixo risco.\n\n" +
+            "• Descendente (Downsloping): Geralmente indica um maior risco de isquemia miocárdica (fluxo sanguíneo inadequado para o coração).", // Mensagem explicativa
+            "Entendi" // Texto do botão para fechar
+        );
     }
 
     private async void OnEnviarQuestionarioClicked(object sender, EventArgs e)
@@ -170,4 +187,34 @@ public partial class QuestionarioPage : ContentPage
                EletrocardiogramaRepousoPicker.SelectedIndex != -1 &&
                InclinacaoSTPicker.SelectedIndex != -1;
     }
+    public async Task ClearForm()
+    {
+        // Limpa os campos de texto
+        NomePacienteEntry.Text = string.Empty;
+        IdadeEntry.Text = string.Empty;
+
+        // Redefine os RadioButtons
+        SexoMasculinoRadio.IsChecked = true;
+
+        // Redefine os Pickers
+        TipoDorPeitoPicker.SelectedIndex = -1;
+        EletrocardiogramaRepousoPicker.SelectedIndex = -1;
+        InclinacaoSTPicker.SelectedIndex = -1;
+
+        // Redefine os Switches
+        GlicemiaSwitch.IsToggled = false;
+        AnginaExercicioSwitch.IsToggled = false;
+
+        // Redefine os Sliders para seus valores padrão
+        PressaoSlider.Value = 120;
+        ColesterolSlider.Value = 200;
+        FreqCardiacaSlider.Value = 150;
+        OldpeakSlider.Value = 1.0;
+
+        await MainContentScrollView.ScrollToAsync(0, 0, true);
+    }
+
+
+
+
 }

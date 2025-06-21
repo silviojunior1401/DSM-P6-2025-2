@@ -4,10 +4,10 @@
             xmlns:local="clr-namespace:CardioCheck"
             x:Class="CardioCheck.MenuPrincipal"
             BarBackgroundColor="{StaticResource White}"
-            BarTextColor="{StaticResource Primary}"
-            SelectedTabColor="{StaticResource Primary}"
+            
+            SelectedTabColor="{StaticResource Primary}" 
+            
             UnselectedTabColor="{StaticResource Gray500}">
-
 
     <local:HomePage Title="Início" IconImageSource="homepage.png" />
     <local:QuestionarioPage Title="CardioCheck" IconImageSource="heartcheck.png" />

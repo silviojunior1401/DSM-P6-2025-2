@@ -20,9 +20,11 @@
             TextColor="{StaticResource TextPrimary}"
             Margin="25,100,16,8"/>
 
-        <ActivityIndicator Grid.Row="1" x:Name="LoadingIndicator" IsRunning="True" VerticalOptions="Center" HorizontalOptions="Center" />
 
-        <CollectionView Grid.Row="1" x:Name="HistoricoCollectionView" ItemsSource="{Binding Historico}">
+        <CollectionView Grid.Row="1" 
+                        x:Name="HistoricoCollectionView" 
+                        ItemsSource="{Binding Historico}"
+                        >
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:Avaliacao">
                     <Frame Margin="16,8" Padding="16" CornerRadius="12" BorderColor="{StaticResource BorderColor}" BackgroundColor="{StaticResource CardBackground}" HasShadow="False">
@@ -55,5 +57,8 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        <ActivityIndicator Grid.Row="1" x:Name="LoadingIndicator" IsRunning="True" VerticalOptions="Center" HorizontalOptions="Center" />
+
+
     </Grid>
 </ContentPage>
