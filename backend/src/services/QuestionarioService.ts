@@ -49,7 +49,7 @@ export class QuestionarioService {
 
             // Executar o script Python com os dados do questionário
             const { stdout, stderr } = await execPromise(
-                `python ${pythonScriptPath} --input "${inputJson}"`
+                `python "${pythonScriptPath}" --input "${inputJson}"`
             );
 
             if (stderr) {
