@@ -112,7 +112,7 @@ A API, documentada com `openapi.yaml`, expõe os seguintes endpoints principais 
 # APP
 <video controls src="docs/Imagens/APP Cardio.mp4" title="Title"></video>
 
-![alt text](docs/Imagens/qemu-system-x86_64_nQeOUJGuQQ.png)
+![alt text](docs/Imagens/qemu-system-x86_64_nQeOUJGuQQ.png)   
 ![alt text](docs/Imagens/qemu-system-x86_64_hsUzrEe4xl.png)
 ![alt text](docs/Imagens/qemu-system-x86_64_5C27oxXB2k.png)
 ![alt text](docs/Imagens/qemu-system-x86_64_lMjj4R9V9G.png)
