@@ -4,7 +4,7 @@ info:
   description: API para o aplicativo móvel CardioCheck, utilizado por médicos para avaliar o risco de doenças cardíacas em pacientes.
   version: 1.0.0
 servers:
-  - url: https://api.cardiocheck.com/v1
+  - url: http://cardiocheck.eastus2.cloudapp.azure.com/
     description: Servidor de Produção
   - url: http://localhost:3000/v1
     description: Servidor de Homologação
