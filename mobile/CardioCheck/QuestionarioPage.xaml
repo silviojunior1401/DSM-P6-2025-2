@@ -265,10 +265,10 @@
 
                         <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FormFieldBorderStyle}">
                             <Entry x:Name="FrequenciaCardiacaMaximaEntry"
-                                   Keyboard="Numeric"
-                                   IsReadOnly="True"
-                                   Style="{StaticResource FormEntryStyle}"
-                                   Text="{Binding Source={x:Reference FreqCardiacaSlider}, Path=Value, StringFormat='{0:F0}'}" />
+                               Keyboard="Numeric"
+                               IsReadOnly="True"
+                               Style="{StaticResource FormEntryStyle}"
+                               Text="{Binding Source={x:Reference FreqCardiacaSlider}, Path=Value, StringFormat='{0:F0}'}" />
                         </Border>
 
                         <BoxView Grid.Row="1" Grid.Column="0"
@@ -434,21 +434,36 @@
 
         <Grid x:Name="LoaderGrid" 
               IsVisible="False" 
-              BackgroundColor="#80000000" 
               HorizontalOptions="FillAndExpand" 
               VerticalOptions="FillAndExpand">
 
+            <BoxView>
+                <BoxView.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#E62196F3" Offset="0.0" />
+                        <GradientStop Color="#E60D47A1" Offset="1.0" />
+                    </LinearGradientBrush>
+                </BoxView.Background>
+            </BoxView>
+
             <VerticalStackLayout VerticalOptions="Center" 
                                  HorizontalOptions="Center" 
-                                 Spacing="10">
+                                 Spacing="20">
 
-                <ActivityIndicator IsRunning="True" Color="{StaticResource White}" />
+                <Image Source="icone_dados.gif"
+                       IsAnimationPlaying="True"
+                       HeightRequest="100"
+                       WidthRequest="100"/>
+
                 <Label Text="Analisando os dados, aguarde..."
-                       TextColor="{StaticResource White}"
+                       TextColor="White"
                        HorizontalOptions="Center"
-                       FontFamily="LatoBold"/>
+                       FontFamily="LatoBold"
+                       FontSize="16"/>
             </VerticalStackLayout>
         </Grid>
+
+
     </Grid>
 
 
