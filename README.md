@@ -110,7 +110,7 @@ A API, documentada com `openapi.yaml`, expõe os seguintes endpoints principais 
 # Imagens do APP, API e AI
 
 ###       Video APP
-<video controls src="docs/Imagens/APP Cardio.mp4" title="Title"></video>   
+![alt text](docs/Imagens/APP.gif)   
 
 ### Imagens APP
 ![alt text](docs/Imagens/qemu-system-x86_64_nQeOUJGuQQ.png)   
@@ -123,7 +123,7 @@ A API, documentada com `openapi.yaml`, expõe os seguintes endpoints principais 
 ![alt text](docs/Imagens/qemu-system-x86_64_94IZlXeUF3.png)
 
 # Video AI
-<video controls src="docs/Imagens/Processamento AI.mp4" title=""></video>
+![alt text](docs/Imagens/Processamento-AI.gif)   
 
 # API
 ![alt text](docs/Imagens/Code_zWGxsJF1V2.png)
