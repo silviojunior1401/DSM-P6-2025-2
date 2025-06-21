@@ -1,5 +1,9 @@
 # CardioCheck - Aplicação Mobile para Verificação de Risco Cardíaco
 
+### 🎙️ [Deep dive](docs/deepdive.mp3)
+
+### 📹 [Vídeo no YouTube](https://youtu.be/Yk_RNUFOG6M)
+
 ## 🚀 Visão Geral do Projeto
 
 O CardioCheck é um sistema composto por uma aplicação móvel e uma API de backend, projetado para auxiliar médicos na avaliação de risco de doenças cardíacas em pacientes. A aplicação utiliza um modelo de inteligência artificial para processar dados de saúde inseridos pelo médico, como idade, pressão arterial, colesterol e resultados de exames, fornecendo uma classificação de risco (baixo ou alto) e recomendações apropriadas.
@@ -74,6 +78,16 @@ Siga os passos abaixo para configurar e executar o ambiente de desenvolvimento e
 
     ```bash
     pip install -r requirements.txt
+    ```
+
+4.  **Instale demais dependências globais e execute as migrations para construir a estrutura do database:**
+
+    ```bash
+    npm i -g yarn
+
+    npm i -g ts-node-dev
+
+    yarn typeorm migration:run -d ./src/config/database.ts
     ```
 
 5.  **Execute a API em modo de desenvolvimento:**
