@@ -61,7 +61,7 @@ O sistema é composto por quatro componentes principais:
 
 ### 2. Requisitos Não Funcionais
 **RNF01 - Desempenho**
-- O tempo de resposta para processamento do questionário não deve exceder 3 segundos
+- O tempo de resposta para processamento do questionário não deve exceder 30 segundos
 - A aplicação deve suportar até 1000 usuários simultâneos
 - O sistema deve processar até 10.000 avaliações por dia
 
@@ -72,12 +72,11 @@ O sistema é composto por quatro componentes principais:
 
 **RNF03 - Usabilidade**
 - A interface deve ser intuitiva e acessível para usuários de todas as idades
-- O aplicativo deve seguir as diretrizes de design do Material Design
 - O sistema deve fornecer feedback claro sobre erros e ações realizadas
 
 **RNF04 - Escalabilidade**
 - A arquitetura deve permitir escalar horizontalmente para atender ao aumento de demanda
-- O banco de dados deve suportar crescimento de até 1TB por ano
+- O banco de dados deve suportar crescimento de até 1GB por ano
 
 **RNF05 - Compatibilidade**
 - O aplicativo deve ser compatível com Android 8.0 (Oreo) ou superior
@@ -132,7 +131,6 @@ O sistema é composto por quatro componentes principais:
 **RN02 - Avaliação de Risco**
 - O modelo de IA deve ser treinado com o dataset do Kaggle especificado
 - A precisão mínima aceitável do modelo de classificação é de 85%
-- O modelo deve ser atualizado trimestralmente com novos dados
 
 **RN03 - Recomendações Médicas**
 - Usuários classificados com risco de doença cardíaca devem receber recomendação para consultar um cardiologista em até 30 dias
