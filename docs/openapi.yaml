@@ -199,6 +199,8 @@ components:
         resultado:
           type: integer
           enum: [0, 1]
+        questionario:
+          $ref: '#/components/schemas/Questionario'
 
   securitySchemes:
     bearerAuth:
