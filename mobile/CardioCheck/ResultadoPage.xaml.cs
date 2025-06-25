@@ -4,6 +4,7 @@ namespace CardioCheck;
 
 public partial class ResultadoPage : ContentPage
 {
+
     public ResultadoPage(Questionario questionario, Resultado resultado)
     {
         InitializeComponent();

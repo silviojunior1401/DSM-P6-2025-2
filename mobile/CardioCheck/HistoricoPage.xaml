@@ -50,6 +50,7 @@
                             SelectionMode="Single"
                             IsVisible="False"
                             VerticalOptions="FillAndExpand">
+                
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Avaliacao">

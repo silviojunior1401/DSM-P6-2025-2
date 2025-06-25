@@ -11,5 +11,14 @@ namespace CardioCheck.Models
         public static string Email { get; set; }
         public static string Token { get; set; }
         public static string UrlApi { get; set; } = "http://10.0.2.2:3000/v1";
+
+        public static void Logout()
+        {
+            Email = null;
+            Token = null;
+        }
+
     }
+
+
 }

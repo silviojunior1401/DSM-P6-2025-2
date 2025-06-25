@@ -5,6 +5,7 @@ using CardioCheck.Models;
 using CardioCheck.Model;
 
 
+
 namespace CardioCheck;
 
 public partial class HistoricoPage : ContentPage

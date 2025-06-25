@@ -9,8 +9,8 @@
 
     <ContentPage.Resources>
         <Style x:Key="FormLabelStyle" TargetType="Label">
-            <Setter Property="FontFamily" Value="LatoRegular" />
-            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontFamily" Value="LatoBold" />
+            <Setter Property="FontSize" Value="14" />
             <Setter Property="TextColor" Value="{StaticResource Gray600}" />
             <Setter Property="Margin" Value="10,10,0,8" />
         </Style>
@@ -424,7 +424,9 @@
                 <Button 
                     Text="Analisar Risco Cardíaco" 
                     Clicked="OnEnviarQuestionarioClicked"
-                    Style="{StaticResource PrimaryButtonStyle}"
+                    FontSize="16"
+                    FontFamily="ComfortaaBold"
+                    BackgroundColor="#007BFF"
                     Margin="0,20,0,0"/>
 
                 <Label x:Name="ResultadoLabel" FontSize="Medium" HorizontalTextAlignment="Center" Margin="0,10,0,0"/>

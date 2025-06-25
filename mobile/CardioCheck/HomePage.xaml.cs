@@ -1,3 +1,4 @@
+using CardioCheck.Models;
 using System.Collections.ObjectModel; // Usado para coleções que notificam a UI
 
 namespace CardioCheck;
@@ -71,10 +72,24 @@ public partial class HomePage : ContentPage
         }
     }
 
-    // Lógica para o botão de logout (mantenha a sua implementação)
+    // Lógica para o botão de logout 
     private async void OnLogoutClicked(object sender, TappedEventArgs e)
     {
-        // Exemplo:
-        // await Navigation.PopToRootAsync();
+        // 1. Pede confirmação ao usuário.
+        bool confirmarSaida = await DisplayAlert(
+            "Confirmar Saída",
+            "Tem a certeza de que deseja sair da sua conta?",
+            "Sim, Sair",
+            "Cancelar"
+        );
+
+        if (confirmarSaida)
+        {
+            // 2. Chama o método para limpar o Email e o Token.
+            SessaoLogin.Logout();
+
+            // 3. Redireciona para a página de Login, reiniciando a aplicação.
+            Application.Current.MainPage = new NavigationPage(new LoginPage());
+        }
     }
 }

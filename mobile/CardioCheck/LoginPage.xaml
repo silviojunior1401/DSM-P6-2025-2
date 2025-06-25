@@ -29,15 +29,17 @@
                 <Image Source="logo.png" HeightRequest="80" HorizontalOptions="Center" Margin="0,0,0,20"/>
 
                 <Label Text="Acesse sua conta"
-                       FontSize="18"
+                       FontSize="15"
+                       FontFamily="ComfortaaBold"
                        HorizontalOptions="Center"
-                       TextColor="White"/>
+                       TextColor="Black"/>
 
                 <Border Style="{StaticResource TranslucentEntryStyle}">
                     <Entry x:Name="UsuarioEntry"
                            Placeholder="E-mail"
                            Keyboard="Email"
                            FontSize="15"
+                           FontFamily="ComfortaaRegular"
                            Text="doc@gmail.com"
                            TextColor="Black"
                            PlaceholderColor="#E0E0E0"
@@ -50,6 +52,7 @@
                            Placeholder="Senha"
                            IsPassword="True"
                            FontSize="15"
+                           FontFamily="ComfortaaRegular"
                            Text="123456"
                            TextColor="Black"
                            PlaceholderColor="#E0E0E0"
@@ -65,7 +68,7 @@
 
                 <Button Text="Entrar"
                         Clicked="OnEntrarClicked"
-                        BackgroundColor="DodgerBlue"
+                        BackgroundColor="#007BFF"
                         TextColor="White"
                         CornerRadius="28"
                         HeightRequest="55"
