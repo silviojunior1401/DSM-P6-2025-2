@@ -66,7 +66,8 @@
 
             <Button Text="Cadastrar"
                     Clicked="OnCadastrarClicked"
-                    BackgroundColor="DodgerBlue"
+                    BackgroundColor="#0073C2"
+                    FontFamily="ComfortaaBold"
                     TextColor="White"
                     CornerRadius="10"
                     HeightRequest="50"/>
@@ -74,6 +75,7 @@
             <Button Text="Voltar para Login"
                     Clicked="OnVoltarClicked"
                     BackgroundColor="#595959"
+                    FontFamily="ComfortaaBold"
                     TextColor="White"
                     CornerRadius="10"
                     HeightRequest="50"/>

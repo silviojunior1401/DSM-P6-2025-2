@@ -47,6 +47,66 @@ public partial class QuestionarioPage : ContentPage
         }
     }
 
+    private void OnIdadeEntryTextChanged(object sender, TextChangedEventArgs e)
+    {
+        // Garante que o sender é um Entry e que o texto não está vazio
+        if (sender is not Entry idadeEntry || string.IsNullOrEmpty(e.NewTextValue))
+        {
+            return;
+        }
+
+
+        if (int.TryParse(e.NewTextValue, out int idade))
+        {
+            if (idade < 1 || idade > 110)
+            {
+
+                idadeEntry.Text = e.OldTextValue ?? "";
+            }
+        }
+        else
+        {
+          
+            idadeEntry.Text = e.OldTextValue ?? "";
+        }
+    }
+
+    private async void OnInfoEcgTapped(object sender, TappedEventArgs e)
+    {
+        // Crie aqui o seu pop-up com as informações detalhadas sobre o ECG
+        await DisplayAlert(
+            "Eletrocardiograma em Repouso",
+            "Resultados:\n\n" +
+            "• Normal: Sem anormalidades significativas.\n\n" +
+            "• Anormalidade da onda ST-T: Pode indicar problemas de repolarização ventricular, isquemia, entre outros.\n\n" +
+            "• Hipertrofia ventricular esquerda: Sugere um aumento da massa muscular do ventrículo esquerdo, frequentemente associado à hipertensão.",
+            "OK"
+        );
+    }
+
+    private async void OnInfoDorPeitoTapped(object sender, TappedEventArgs e)
+    {
+        await DisplayAlert(
+            "Tipos de Dor no Peito",
+            "• Angina Típica: Dor torácica clássica relacionada ao esforço ou estresse, aliviada com repouso.\n\n" +
+            "• Angina Atípica: Dor que não preenche todos os critérios da angina típica.\n\n" +
+            "• Dor Não-anginosa: Dor no peito que provavelmente não é de origem cardíaca.\n\n" +
+            "• Assintomático: Ausência de dor no peito.",
+            "OK"
+        );
+    }
+
+    private async void OnInfoOldpeakTapped(object sender, TappedEventArgs e)
+    {
+        await DisplayAlert(
+            "Oldpeak",
+            "Refere-se à depressão do segmento ST induzida pelo exercício em relação ao estado de repouso.\n\n" +
+            "É um importante indicador eletrocardiográfico de isquemia miocárdica.",
+            "OK"
+        );
+    }
+
+
     private async void OnInfoInclinacaoSTTapped(object sender, TappedEventArgs e)
     {
         await DisplayAlert(

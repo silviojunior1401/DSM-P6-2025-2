@@ -10,18 +10,14 @@
             <Setter Property="BackgroundColor" Value="#40FFFFFF" />
             <Setter Property="StrokeShape" Value="RoundRectangle 30,30,30,30" />
             <Setter Property="StrokeThickness" Value="0" />
-            <Setter Property="Padding" Value="15,0" />
             <Setter Property="HeightRequest" Value="55" />
         </Style>
     </ContentPage.Resources>
 
     <Grid>
-
         <Image 
             Source="fundo.png" 
             Aspect="AspectFill" />
-
-       
 
         <ScrollView>
             <VerticalStackLayout Padding="30" Spacing="15" VerticalOptions="CenterAndExpand">
@@ -35,29 +31,53 @@
                        TextColor="Black"/>
 
                 <Border Style="{StaticResource TranslucentEntryStyle}">
-                    <Entry x:Name="UsuarioEntry"
-                           Placeholder="E-mail"
-                           Keyboard="Email"
-                           FontSize="15"
-                           FontFamily="ComfortaaRegular"
-                           Text="doc@gmail.com"
-                           TextColor="Black"
-                           PlaceholderColor="#E0E0E0"
-                           BackgroundColor="Transparent"
-                           VerticalOptions="Center"/>
+                    <Grid ColumnDefinitions="Auto, *" ColumnSpacing="10" Padding="15,0">
+                        <Image Grid.Column="0" VerticalOptions="Center">
+                            <Image.Source>
+                                <FontImageSource Glyph="&#xF2C0;"
+                                                 FontFamily="FontIcons"
+                                                 Size="20"
+                                                 Color="Black" />
+                            </Image.Source>
+                        </Image>
+
+                        <Entry Grid.Column="1"
+                               x:Name="UsuarioEntry"
+                               Placeholder="E-mail"
+                               Keyboard="Email"
+                               FontSize="15"
+                               FontFamily="ComfortaaRegular"
+                               Text="doc@gmail.com"
+                               TextColor="Black"
+                               PlaceholderColor="#80000000"
+                               BackgroundColor="Transparent"
+                               VerticalOptions="Center"/>
+                    </Grid>
                 </Border>
 
                 <Border Style="{StaticResource TranslucentEntryStyle}">
-                    <Entry x:Name="SenhaEntry"
-                           Placeholder="Senha"
-                           IsPassword="True"
-                           FontSize="15"
-                           FontFamily="ComfortaaRegular"
-                           Text="123456"
-                           TextColor="Black"
-                           PlaceholderColor="#E0E0E0"
-                           BackgroundColor="Transparent"
-                           VerticalOptions="Center"/>
+                    <Grid ColumnDefinitions="Auto, *" ColumnSpacing="10" Padding="15,0">
+                        <Image Grid.Column="0" VerticalOptions="Center">
+                            <Image.Source>
+                                <FontImageSource Glyph="&#xE80A;" 
+                                                 FontFamily="FontIcons"
+                                                 Size="20"
+                                                 Color="black" />
+                            </Image.Source>
+                        </Image>
+
+                        <Entry Grid.Column="1"
+                               x:Name="SenhaEntry"
+                               Placeholder="Senha"
+                               IsPassword="True"
+                               FontSize="15"
+                               FontFamily="ComfortaaRegular"
+                               Text="123456"
+                               TextColor="Black"
+                               PlaceholderColor="#80000000"
+                               BackgroundColor="Transparent"
+                               VerticalOptions="Center"/>
+                    </Grid>
                 </Border>
 
                 <Label x:Name="MensagemErro"
@@ -69,6 +89,7 @@
                 <Button Text="Entrar"
                         Clicked="OnEntrarClicked"
                         BackgroundColor="#007BFF"
+                        FontFamily="ComfortaaBold"
                         TextColor="White"
                         CornerRadius="28"
                         HeightRequest="55"
@@ -78,6 +99,7 @@
                 <Button Text="Cadastrar Médico"
                         Clicked="OnCadastrarClicked"
                         BackgroundColor="#595959"
+                                                FontFamily="ComfortaaBold"
                         TextColor="White"
                         CornerRadius="28"
                         HeightRequest="55"/>

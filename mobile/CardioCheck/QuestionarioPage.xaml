@@ -65,14 +65,17 @@
                         <Entry x:Name="NomePacienteEntry" Placeholder="Digite o nome completo" Style="{StaticResource FormEntryStyle}" />
                     </Border>
                 </VerticalStackLayout>
-                
-                
-                
+
+
 
                 <VerticalStackLayout>
                     <Label Text="Idade" Style="{StaticResource FormLabelStyle}" />
-                    <Border Style="{StaticResource FormFieldBorderStyle}">
-                        <Entry x:Name="IdadeEntry" Placeholder="Ex: 45" Keyboard="Numeric" Style="{StaticResource FormEntryStyle}"/>
+                    <Border x:Name="IdadeEntryBorder" Style="{StaticResource FormFieldBorderStyle}">
+                        <Entry x:Name="IdadeEntry" 
+                               Placeholder="Ex: 45" 
+                               Keyboard="Numeric" 
+                               Style="{StaticResource FormEntryStyle}"
+                               TextChanged="OnIdadeEntryTextChanged" />
                     </Border>
                 </VerticalStackLayout>
 
@@ -96,7 +99,28 @@
 
 
                 <VerticalStackLayout>
-                    <Label Text="Tipo de Dor no Peito" Style="{StaticResource FormLabelStyle}" />
+                    <Grid ColumnDefinitions="*, Auto" ColumnSpacing="8">
+                        <Label 
+                            Grid.Column="0"
+                            Text="Tipo de Dor no Peito" 
+                            Style="{StaticResource FormLabelStyle}"
+                            VerticalOptions="Center"
+                            Margin="0"/>
+
+                        <Label 
+                            Grid.Column="1"
+                            Text="+ info"
+                            FontSize="15"
+                            Margin="0,0,10,0"
+                            TextColor="{StaticResource Primary}"
+                            FontAttributes="Bold"
+                            VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnInfoDorPeitoTapped" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+
                     <Border Style="{StaticResource FormFieldBorderStyle}">
                         <Picker x:Name="TipoDorPeitoPicker" Title="Selecione o tipo de dor" Style="{StaticResource FormPickerStyle}">
                             <Picker.ItemsSource>
@@ -243,7 +267,28 @@
 
 
                 <VerticalStackLayout>
-                    <Label Text="Eletrocardiograma em Repouso" Style="{StaticResource FormLabelStyle}" />
+                    <Grid ColumnDefinitions="*, Auto" ColumnSpacing="8">
+                        <Label 
+                            Grid.Column="0"
+                            Text="Eletrocardiograma em Repouso" 
+                            Style="{StaticResource FormLabelStyle}"
+                            VerticalOptions="Center"
+                            Margin="0"/>
+
+                        <Label 
+                            Grid.Column="1"
+                            Text="+ info"
+                            FontSize="15"
+                            Margin="0,0,10,0"
+                            TextColor="{StaticResource Primary}"
+                            FontAttributes="Bold"
+                            VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnInfoEcgTapped" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+
                     <Border Style="{StaticResource FormFieldBorderStyle}">
                         <Picker x:Name="EletrocardiogramaRepousoPicker" Title="Selecione o resultado" Style="{StaticResource FormPickerStyle}">
                             <Picker.ItemsSource>
@@ -256,6 +301,7 @@
                         </Picker>
                     </Border>
                 </VerticalStackLayout>
+                
 
 
                 <VerticalStackLayout>
@@ -335,12 +381,31 @@
 
 
                 <VerticalStackLayout>
-                    <Label Text="Oldpeak (Depressão de ST induzida por exercício)" Style="{StaticResource FormLabelStyle}" />
+                    <Grid ColumnDefinitions="*, Auto" ColumnSpacing="8">
+                        <Label 
+                            Grid.Column="0"
+                            Text="Oldpeak (Depressão de ST induzida por exercício)" 
+                            Style="{StaticResource FormLabelStyle}"
+                            VerticalOptions="Center"
+                            Margin="0"/>
+
+                        <Label 
+                            Grid.Column="1"
+                            Text="+ info"
+                            FontSize="15"
+                            Margin="0,0,10,0"
+                            TextColor="{StaticResource Primary}"
+                            FontAttributes="Bold"
+                            VerticalOptions="Center">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnInfoOldpeakTapped" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
 
                     <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto" RowSpacing="8">
-
                         <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource FormFieldBorderStyle}">
-                                <Entry x:Name="OldpeakEntry"
+                            <Entry x:Name="OldpeakEntry"
                                        Keyboard="Numeric"
                                        IsReadOnly="True"
                                        Style="{StaticResource FormEntryStyle}"
@@ -348,9 +413,9 @@
                         </Border>
 
                         <BoxView Grid.Row="1" Grid.Column="0"
-                             HeightRequest="2"
-                             CornerRadius="4"
-                             VerticalOptions="Center">
+                                 HeightRequest="2"
+                                 CornerRadius="4"
+                                 VerticalOptions="Center">
                             <BoxView.Background>
                                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                                     <GradientStop Color="#28A745" Offset="0.0" />
@@ -439,29 +504,36 @@
               HorizontalOptions="FillAndExpand" 
               VerticalOptions="FillAndExpand">
 
-            <BoxView>
-                <BoxView.Background>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                        <GradientStop Color="#E62196F3" Offset="0.0" />
-                        <GradientStop Color="#E60D47A1" Offset="1.0" />
-                    </LinearGradientBrush>
-                </BoxView.Background>
-            </BoxView>
+            <BoxView BackgroundColor="White" />
 
             <VerticalStackLayout VerticalOptions="Center" 
                                  HorizontalOptions="Center" 
                                  Spacing="20">
 
-                <Image Source="icone_dados.gif"
+                <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+
+                    <Image Source="braindata.gif"
                        IsAnimationPlaying="True"
                        HeightRequest="100"
                        WidthRequest="100"/>
 
+                    <Image Source="python.gif"
+                           IsAnimationPlaying="True"
+                           HeightRequest="100"
+                           WidthRequest="100"/>
+
+                </HorizontalStackLayout>
+
+
                 <Label Text="Analisando os dados, aguarde..."
-                       TextColor="White"
+                       TextColor="#0fac8d"
                        HorizontalOptions="Center"
-                       FontFamily="LatoBold"
-                       FontSize="16"/>
+                       FontFamily="ComfortaaBold"
+                       FontSize="20"/>
+
+
+
+
             </VerticalStackLayout>
         </Grid>
 

@@ -72,6 +72,29 @@ public partial class HomePage : ContentPage
         }
     }
 
+
+
+    private void OnStartClicked(object sender, EventArgs e)
+    {
+
+        if (this.Parent is TabbedPage tabbedPage)
+        {
+
+            var cardiocheckTab = tabbedPage.Children.FirstOrDefault(p => p is QuestionarioPage || p.Title == "Cardiocheck");
+
+
+            if (cardiocheckTab != null)
+            {
+                tabbedPage.CurrentPage = cardiocheckTab;
+            }
+            else
+            {
+                DisplayAlert("Erro", "A aba Cardiocheck não foi encontrada.", "OK");
+            }
+        }
+    }
+
+
     // Lógica para o botão de logout 
     private async void OnLogoutClicked(object sender, TappedEventArgs e)
     {

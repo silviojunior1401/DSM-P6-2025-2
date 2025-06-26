@@ -13,14 +13,30 @@ public partial class ResultadoPage : ContentPage
 
     private void PopulateData(Questionario questionario, Resultado resultado)
     {
-        // --- Popula o card de resultado em destaque ---
-        var corResultado = resultado.Predicao == 1 ? Colors.Red : Colors.Green;
-        var textoResultado = resultado.Predicao == 1 ? "ALTO RISCO" : "BAIXO RISCO";
+        // --- Define as variáveis com base no resultado da predição ---
+        bool isHighRisk = resultado.Predicao == 1;
 
+        var corResultado = isHighRisk ? Colors.Red : Colors.Green;
+        var corFundoIcone = isHighRisk ? Color.FromRgba(255, 0, 0, 0.1) : Color.FromRgba(0, 128, 0, 0.1);
+        var textoResultado = isHighRisk ? "ALTO RISCO" : "BAIXO RISCO";
+        var iconeGlyph = isHighRisk ? "\uE808" : "\uE807"; // E808 para triste, E807 para feliz
+
+        // --- Popula o card de resultado em destaque ---
         ResultadoBorder.Stroke = new SolidColorBrush(corResultado);
         ResultadoPredicaoLabel.Text = textoResultado;
         ResultadoPredicaoLabel.TextColor = corResultado;
         ResultadoRecomendacaoLabel.Text = resultado.Recomendacao;
+
+        // --- LÓGICA DO ÍCONE ADICIONADA AQUI ---
+        ResultadoIconCircle.BackgroundColor = corFundoIcone;
+        ResultadoIcon.Source = new FontImageSource
+        {
+            Glyph = iconeGlyph,
+            FontFamily = "FontIcons", 
+            Size = 45,
+            Color = corResultado
+        };
+        // --- FIM DA LÓGICA DO ÍCONE ---
 
         // --- Popula o resumo dos dados do paciente ---
         NomeLabel.Text = questionario.Nome;
@@ -28,7 +44,7 @@ public partial class ResultadoPage : ContentPage
         SexoLabel.Text = questionario.Sex == 1 ? "Masculino" : "Feminino";
 
         string[] tiposDorPeito = { "1: Angina Típica", "2: Angina Atípica", "3: Dor Não-anginosa", "4: Assintomático" };
-        DorPeitoLabel.Text = tiposDorPeito[questionario.ChestPainType - 1]; // O valor é 1-based
+        DorPeitoLabel.Text = tiposDorPeito[questionario.ChestPainType - 1];
 
         PressaoLabel.Text = $"{questionario.RestingBloodPressure} mm Hg";
         ColesterolLabel.Text = $"{questionario.SerumCholesterol} mg/dl";
@@ -39,7 +55,7 @@ public partial class ResultadoPage : ContentPage
 
         FreqCardiacaLabel.Text = questionario.MaxHeartRate.ToString();
         AnginaExercicioLabel.Text = questionario.ExerciseAngina == 1 ? "Sim" : "Não";
-        OldpeakLabel.Text = questionario.Oldpeak.ToString("F1"); // Formata para uma casa decimal
+        OldpeakLabel.Text = questionario.Oldpeak.ToString("F1");
 
         string[] inclinacoesST = { "0: Normal", "1: Ascendente", "2: Descendente" };
         InclinacaoStLabel.Text = inclinacoesST[questionario.StSlope];
