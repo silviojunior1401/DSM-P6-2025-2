@@ -54,7 +54,10 @@
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="model:Avaliacao">
-                        <Frame Margin="16,8" Padding="16" CornerRadius="12" BorderColor="{StaticResource Gray200}" BackgroundColor="{StaticResource White}" HasShadow="False">
+                        <Frame Margin="16,8" Padding="16" CornerRadius="12" BorderColor="{StaticResource Gray200}" BackgroundColor="{StaticResource White}" HasShadow="False" >
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnTapped" />
+                            </Frame.GestureRecognizers>
                             <Grid RowDefinitions="Auto, Auto" RowSpacing="12">
 
                                 <HorizontalStackLayout Grid.Row="0" Spacing="12" VerticalOptions="Center">

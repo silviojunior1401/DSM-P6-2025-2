@@ -88,4 +88,14 @@ public partial class HistoricoPage : ContentPage
             HistoricoCollectionView.IsVisible = true; // Mostra a lista após o carregamento
         }
     }
+
+    async private void OnTapped(object sender, TappedEventArgs e)
+    {
+        if (sender is Frame frame && frame.BindingContext is Model.Avaliacao avaliacao)
+        {
+            // Coloque aqui a lógica desejada para o item clicado
+            await Navigation.PushAsync(new ResultadoPage(avaliacao.Questionario, avaliacao.ToResultado()));
+        }
+
+    }
 }
