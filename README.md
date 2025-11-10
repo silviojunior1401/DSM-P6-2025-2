@@ -44,7 +44,7 @@ O sistema é dividido em três componentes principais:
       * Um script em **Python** (`class_heart.py`) que utiliza bibliotecas como **scikit-learn**, **pandas** e **numpy**.
       * Carrega um modelo de classificação pré-treinado (`heart_modelo_lda.joblib`) para realizar a predição de risco cardíaco.
 
-## 🌐 Ambiente de Produção (Online)
+## 🌐 Ambiente de Produção (Online):
 
 O backend do projeto está hospedado na nuvem e pode ser acessado publicamente através do seguinte endereço:
 
