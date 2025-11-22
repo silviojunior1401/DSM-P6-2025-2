@@ -83,14 +83,14 @@
             <VerticalStackLayout Spacing="0">
                 <Label Text="Nome" Style="{StaticResource FormLabelStyle}" />
                 <Border Style="{StaticResource FormFieldBorderStyle}">
-                    <Entry x:Name="NomeEntry" Placeholder="Digite seu nome" Style="{StaticResource FormEntryStyle}" />
+                    <Entry x:Name="NomeEntry"  Style="{StaticResource FormEntryStyle}" />
                 </Border>
             </VerticalStackLayout>
 
             <VerticalStackLayout Spacing="0">
                 <Label Text="Sexo" Style="{StaticResource FormLabelStyle}" />
                 <Border Style="{StaticResource FormFieldBorderStyle}">
-                    <Picker x:Name="SexoPicker" Title="Selecione seu sexo" Style="{StaticResource FormPickerStyle}">
+                    <Picker x:Name="SexoPicker" Title="Selecione o sexo do paciente" Style="{StaticResource FormPickerStyle}">
                         <Picker.ItemsSource>
                             <x:Array Type="{x:Type x:String}">
                                 <x:String>Masculino</x:String>
@@ -105,14 +105,14 @@
             <VerticalStackLayout Spacing="0">
                 <Label Text="Idade" Style="{StaticResource FormLabelStyle}"/>
                 <Border Style="{StaticResource FormFieldBorderStyle}">
-                    <Entry x:Name="IdadeEntry" Placeholder="Digite sua idade" Keyboard="Numeric" Style="{StaticResource FormEntryStyle}" />
+                    <Entry x:Name="IdadeEntry" Placeholder="Digite a idade do paciente" Keyboard="Numeric" Style="{StaticResource FormEntryStyle}" />
                 </Border>
             </VerticalStackLayout>
 
             <VerticalStackLayout Spacing="0">
                 <Label Text="Ocupação" Style="{StaticResource FormLabelStyle}"/>
                 <Border Style="{StaticResource FormFieldBorderStyle}">
-                    <Picker x:Name="OcupacaoPicker" Title="Selecione sua ocupação" Style="{StaticResource FormPickerStyle}">
+                    <Picker x:Name="OcupacaoPicker" Title="Selecione a ocupação" Style="{StaticResource FormPickerStyle}">
                         <Picker.ItemsSource>
                             <x:Array Type="{x:Type x:String}">
                                 <x:String>Médico(a)</x:String>
@@ -141,7 +141,7 @@
             <VerticalStackLayout Spacing="0">
                 <Label Text="Categoria IMC" Style="{StaticResource FormLabelStyle}"/>
                 <Border Style="{StaticResource FormFieldBorderStyle}">
-                    <Picker x:Name="ImcPicker" Title="Selecione a categoria do seu IMC" Style="{StaticResource FormPickerStyle}">
+                    <Picker x:Name="ImcPicker" Title="Selecione a categoria do IMC" Style="{StaticResource FormPickerStyle}">
                         <Picker.ItemsSource>
                             <x:Array Type="{x:Type x:String}">
                                 <x:String>Abaixo do peso</x:String>
