@@ -58,12 +58,12 @@
                         <Grid ColumnDefinitions="Auto, *" ColumnSpacing="15">
 
                             <VerticalStackLayout Grid.Column="1" VerticalOptions="Center">
-                                <Label Text="❤️ Questionário Coração"
+                                <Label Text="❤️  Questionário Coração"
                                       FontSize="22" 
                                       FontFamily="ComfortaaBold"
                                       TextColor="{StaticResource White}"
                                       VerticalOptions="Center"/>
-                                <Label Text="Avaliação dos hábitos de sono e fatores de risco."
+                                <Label Text="                Avaliação do risco cardíaco."
                                       FontSize="14" 
                                       FontFamily="LatoRegular"
                                       TextColor="{StaticResource White}"
