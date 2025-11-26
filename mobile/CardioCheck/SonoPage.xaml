@@ -83,7 +83,7 @@
             <VerticalStackLayout Spacing="0">
                 <Label Text="Nome" Style="{StaticResource FormLabelStyle}" />
                 <Border Style="{StaticResource FormFieldBorderStyle}">
-                    <Entry x:Name="NomeEntry"  Style="{StaticResource FormEntryStyle}" />
+                        <Entry x:Name="NomeEntry"  Placeholder="Digite o nome do paciente" Style="{StaticResource FormEntryStyle}" />
                 </Border>
             </VerticalStackLayout>
 
@@ -95,7 +95,7 @@
                             <x:Array Type="{x:Type x:String}">
                                 <x:String>Masculino</x:String>
                                 <x:String>Feminino</x:String>
-                                <x:String>Prefiro não informar</x:String>
+                                
                             </x:Array>
                         </Picker.ItemsSource>
                     </Picker>

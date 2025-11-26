@@ -99,35 +99,6 @@
                                    IndicatorSize="8"/>
                 </VerticalStackLayout>
 
-                <!--<Frame HeightRequest="200"
-                       WidthRequest="200"
-                           CornerRadius="100"
-                           IsClippedToBounds="True"
-                           Padding="0"
-                           BorderColor="Transparent"
-                           HorizontalOptions="Center"
-                           Margin="0,10,0,0">
-                    <Grid>
-                        <Image Source="iniciar3.gif"
-                               Aspect="AspectFill"
-                               IsAnimationPlaying="True"
-                               Opacity="0.8"/>
-
-                        <Label Text="Iniciar"
-                               FontFamily="ComfortaaBold"
-                               TextColor="#5409af"
-                               FontSize="22"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center"
-                               InputTransparent="True"/>
-
-                        <Grid.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnStartClicked" />
-                        </Grid.GestureRecognizers>
-                    </Grid>
-                    
-                    
-                </Frame>-->
 
 
             </VerticalStackLayout>

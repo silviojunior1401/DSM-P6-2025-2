@@ -491,9 +491,9 @@
                         <Picker x:Name="InclinacaoSTPicker" Title="Selecione a inclinação" Style="{StaticResource FormPickerStyle}">
                             <Picker.ItemsSource>
                                 <x:Array Type="{x:Type x:String}">
-                                    <x:String>0: Normal</x:String>
                                     <x:String>1: Ascendente (Upsloping)</x:String>
-                                    <x:String>2: Descendente (Downsloping)</x:String>
+                                    <x:String>2: Normal</x:String>
+                                    <x:String>3: Descendente (Downsloping)</x:String>
                                 </x:Array>
                             </Picker.ItemsSource>
                         </Picker>

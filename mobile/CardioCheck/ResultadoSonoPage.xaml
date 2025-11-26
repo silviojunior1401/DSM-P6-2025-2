@@ -44,7 +44,7 @@
         <VerticalStackLayout Spacing="25" Padding="25,20">
 
             <Label 
-                Text="Resultado da Avaliação do Sono 💤"
+                Text="Resultado da Avaliação do Sono"
                 FontSize="20" FontFamily="ComfortaaBold"
                 HorizontalOptions="Center"
                 TextColor="{StaticResource Primary}"

@@ -168,7 +168,7 @@ public partial class QuestionarioPage : ContentPage
                 MaxHeartRate = float.Parse(FrequenciaCardiacaMaximaEntry.Text),
                 ExerciseAngina = AnginaExercicioSwitch.IsToggled ? 1 : 0,
                 Oldpeak = float.Parse(OldpeakEntry.Text),
-                StSlope = InclinacaoSTPicker.SelectedIndex
+                StSlope = InclinacaoSTPicker.SelectedIndex +1
             };
 
             var httpClient = new HttpClient();
@@ -277,6 +277,8 @@ public partial class QuestionarioPage : ContentPage
         }
     }
 
+
+
     private bool ValidateInputs()
     {
         return !string.IsNullOrWhiteSpace(NomePacienteEntry.Text) &&
@@ -315,6 +317,8 @@ public partial class QuestionarioPage : ContentPage
 
         await MainContentScrollView.ScrollToAsync(0, 0, true);
     }
+
+
     private async Task<Resultado> PollResultado(string id)
     {
         int maxAttempts = 15;

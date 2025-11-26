@@ -59,8 +59,8 @@ public partial class ResultadoPage : ContentPage
         AnginaExercicioLabel.Text = questionario.ExerciseAngina == 1 ? "Sim" : "Não";
         OldpeakLabel.Text = questionario.Oldpeak.ToString("F1");
 
-        string[] inclinacoesST = { "0: Normal", "1: Ascendente", "2: Descendente" };
-        InclinacaoStLabel.Text = inclinacoesST[questionario.StSlope];
+        string[] inclinacoesST = {"1: Ascendente", "2: Normal",  "3: Descendente" };
+        InclinacaoStLabel.Text = inclinacoesST[questionario.StSlope -1];
     }
 
     private async void OnFinalizarClicked(object sender, EventArgs e)
