@@ -7,6 +7,25 @@ using System.Threading.Tasks;
 
 namespace CardioCheck;
 
+// Classes auxiliares para mapear a resposta do Backend
+public class ApiResponseCoracao
+{
+    [System.Text.Json.Serialization.JsonPropertyName("message")]
+    public string Message { get; set; }
+
+    [System.Text.Json.Serialization.JsonPropertyName("avaliacao")]
+    public AvaliacaoResponseItem Avaliacao { get; set; }
+}
+
+public class AvaliacaoResponseItem
+{
+    [System.Text.Json.Serialization.JsonPropertyName("id")]
+    public string Id { get; set; }
+
+    [System.Text.Json.Serialization.JsonPropertyName("resultado")]
+    public int Resultado { get; set; }
+}
+
 public partial class QuestionarioPage : ContentPage
 {
     public QuestionarioPage()
@@ -168,19 +187,42 @@ public partial class QuestionarioPage : ContentPage
             // ================== ALTERAÇÃO PRINCIPAL AQUI ==================
             if (response.IsSuccessStatusCode)
             {
-                var resultado = JsonSerializer.Deserialize<Resultado>(responseContent);
+                // 1. Desserializa a resposta estruturada (Wrapper)
+                var apiResponse = JsonSerializer.Deserialize<ApiResponseCoracao>(responseContent);
 
-                // Navega para a nova página de resultado, passando os dados
-                await Navigation.PushAsync(new ResultadoPage(questionario, resultado));
+                if (apiResponse?.Avaliacao == null)
+                {
+                    throw new Exception("Resposta inválida do servidor.");
+                }
 
-                // Limpa o Label de erro da página atual
+                // 2. Verifica se já temos o resultado ou se precisa de Polling
+                if (apiResponse.Avaliacao.Resultado != -1)
+                {
+                    // Resultado imediato
+                    var resultadoObj = new Resultado
+                    {
+                        Predicao = apiResponse.Avaliacao.Resultado,
+                        Recomendacao = apiResponse.Avaliacao.Resultado == 1
+                            ? "Paciente apresenta alto risco cardiovascular..." // (Texto completo igual ao frontend)
+                            : "Paciente apresenta baixo risco cardiovascular..."
+                    };
+
+                    await Navigation.PushAsync(new ResultadoPage(questionario, resultadoObj));
+                }
+                else
+                {
+                    // 3. Resultado pendente (-1): Inicia Polling
+                    // Atualiza a UI para informar o usuário
+                    ResultadoLabel.Text = "Processando IA... Aguarde.";
+                    ResultadoLabel.TextColor = Colors.Orange;
+
+                    // Chama o polling passando o ID recebido
+                    var resultadoFinal = await PollResultado(apiResponse.Avaliacao.Id);
+
+                    await Navigation.PushAsync(new ResultadoPage(questionario, resultadoFinal));
+                }
+
                 ResultadoLabel.Text = string.Empty;
-            }
-            else
-            {
-                // Em caso de erro, o resultado ainda é mostrado no Label da página atual
-                ResultadoLabel.Text = $"Erro ao processar: {responseContent}";
-                ResultadoLabel.TextColor = Colors.Red;
             }
             // ==============================================================
 
@@ -272,6 +314,80 @@ public partial class QuestionarioPage : ContentPage
         OldpeakSlider.Value = 1.0;
 
         await MainContentScrollView.ScrollToAsync(0, 0, true);
+    }
+    private async Task<Resultado> PollResultado(string id)
+    {
+        int maxAttempts = 15;
+        int attempts = 0;
+        string url = $"{SessaoLogin.UrlApi}/historico/coracao"; // Endpoint de histórico
+
+        using (var pollingClient = new HttpClient())
+        {
+            pollingClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", SessaoLogin.Token);
+
+            while (attempts < maxAttempts)
+            {
+                // Lógica de espera (Backoff) igual ao Frontend
+                int delay = 15000;
+                if (attempts < 3) delay = 3000;
+                else if (attempts < 6) delay = 10000;
+
+                await Task.Delay(delay);
+                attempts++;
+
+                try
+                {
+                    var response = await pollingClient.GetAsync(url);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var content = await response.Content.ReadAsStringAsync();
+
+                        // O endpoint retorna uma lista de avaliações. Precisamos encontrar a nossa pelo ID.
+                        var historico = JsonSerializer.Deserialize<List<Avaliacao>>(content);
+                        var avaliacao = historico?.FirstOrDefault(a => a.Data != null);
+                        // Nota: O modelo Avaliacao do mobile não parece ter o campo ID mapeado explicitamente no arquivo enviado,
+                        // mas precisaremos identificar a avaliação correta. 
+                        // SUGESTÃO: O ideal é que o Model/Avaliacao.cs tenha o campo Id. 
+                        // Se não tiver, assumiremos que a mais recente (First) é a nossa se a lista vier ordenada, 
+                        // mas para ser robusto como o frontend, adicione "public string Id { get; set; }" no Model/Avaliacao.cs.
+
+                        // Assumindo que você adicionou o ID no Model/Avaliacao.cs ou usando lógica de busca:
+                        // var item = historico.Find(x => x.Id == id); // Se ID existir no model
+
+                        // Lógica alternativa se não houver ID no Model Avaliacao.cs atual:
+                        // Pegar a última avaliação processada se confiarmos na ordem.
+                        // Mas vamos seguir a lógica do frontend que busca por ID.
+
+                        // *IMPORTANTE*: Para este código funcionar 100%, adicione [JsonPropertyName("id")] public string Id { get; set; } na classe Avaliacao.cs
+
+                        // Usando dynamic ou JsonElement para contornar caso o Model não tenha ID ainda:
+                        var jsonDoc = JsonDocument.Parse(content);
+                        foreach (var element in jsonDoc.RootElement.EnumerateArray())
+                        {
+                            if (element.GetProperty("id").GetString() == id)
+                            {
+                                int resultadoValor = element.GetProperty("resultado").GetInt32();
+                                if (resultadoValor != -1)
+                                {
+                                    // Sucesso! Converter para o objeto Resultado esperado pela tela
+                                    // Recriamos o objeto Avaliacao para usar o método helper ToResultado
+                                    var av = JsonSerializer.Deserialize<Avaliacao>(element.GetRawText());
+                                    return av.ToResultado();
+                                }
+                                break; // Encontrou o ID, mas ainda é -1, sai do foreach e continua o while
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Erro no polling: {ex.Message}");
+                    // Continua tentando se for erro de rede
+                }
+            }
+        }
+
+        throw new Exception("Tempo limite excedido. O processamento está demorando mais que o esperado.");
     }
 
 

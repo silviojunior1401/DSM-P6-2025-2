@@ -15,6 +15,9 @@ namespace CardioCheck.Model
         [JsonPropertyName("questionario")]
         public Questionario Questionario { get; set; }
 
+        [JsonPropertyName("id")] 
+        public string Id { get; set; }
+
         // Propriedade auxiliar para exibição na UI
         public string ResultadoTexto => Resultado == 1 ? "ALTO RISCO" : "BAIXO RISCO";
         public Color ResultadoCor => Resultado == 1 ? Color.FromArgb("#DC3545") : Color.FromArgb("#28A745");

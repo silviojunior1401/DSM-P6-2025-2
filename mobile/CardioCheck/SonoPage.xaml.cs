@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 namespace CardioCheck;
 
 
+
+
 public partial class SonoPage : ContentPage
 {
     // Use um HttpClient estático para melhor performance
@@ -74,17 +76,40 @@ public partial class SonoPage : ContentPage
             HttpResponseMessage response = await client.PostAsync(url, content);
             string responseBody = await response.Content.ReadAsStringAsync();
 
+
+
             if (response.IsSuccessStatusCode)
             {
-                var resultadoResponse = JsonSerializer.Deserialize<Resultado>(responseBody);
+                var apiResponse = JsonSerializer.Deserialize<ApiResponseSono>(responseBody);
 
-                // Navegar para a página de resultado
-                await Navigation.PushAsync(new ResultadoSonoPage(requestData, resultadoResponse));
+                if (apiResponse?.Avaliacao == null) throw new Exception("Resposta inválida.");
+
+                if (apiResponse.Avaliacao.Resultado != -1)
+                {
+                    // Resultado imediato
+                    var resultado = new Resultado
+                    {
+                        Predicao = apiResponse.Avaliacao.Resultado,
+                        Recomendacao = apiResponse.Avaliacao.Resultado == 1
+                            ? "Indícios de distúrbio do sono identificados."
+                            : "Padrões de sono normais."
+                    };
+                    await Navigation.PushAsync(new ResultadoSonoPage(requestData, resultado));
+                }
+                else
+                {
+                    // Polling necessário
+                    // Como o loader já está ativo (SetLoadingState(true) foi chamado no início),
+                    // apenas aguardamos o polling.
+
+                    var resultadoFinal = await PollResultado(apiResponse.Avaliacao.Id);
+
+                    await Navigation.PushAsync(new ResultadoSonoPage(requestData, resultadoFinal));
+                }
             }
-            else
-            {
-                await DisplayAlert("Erro da API", $"Falha ao processar a avaliação. Status: {response.StatusCode}\nDetalhes: {responseBody}", "OK");
-            }
+
+
+
         }
         catch (Exception ex)
         {
@@ -240,4 +265,94 @@ public partial class SonoPage : ContentPage
             _ => null,
         };
     }
+
+    private async Task<Resultado> PollResultado(string id)
+    {
+        int maxAttempts = 15; // Tenta por aprox. 2 minutos (ajustado para ser mais tolerante)
+        int attempts = 0;
+        string url = $"{SessaoLogin.UrlApi}/historico/sono";
+
+        // CONFIGURAÇÃO CRÍTICA: Ignora se é maiúscula ou minúscula (id vs Id)
+        var jsonOptions = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
+
+        while (attempts < maxAttempts)
+        {
+            // Backoff progressivo
+            int delay = 3000; // 3 segundos
+            if (attempts >= 3) delay = 5000;
+            if (attempts >= 6) delay = 10000; // 10 segundos
+
+            await Task.Delay(delay);
+            attempts++;
+
+            try
+            {
+                // Nota: O header de Authorization já está no client estático, 
+                // mas se der erro de 401, reatribua aqui:
+                // client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", SessaoLogin.Token);
+
+                var response = await client.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+
+                    // Desserializa usando as opções CaseInsensitive
+                    var historico = JsonSerializer.Deserialize<List<AvaliacaoSono>>(content, jsonOptions);
+
+                    // Procura o ID na lista
+                    var avaliacao = historico?.FirstOrDefault(a => a.Id == id);
+
+                    // Debug: Ajuda a ver se encontrou
+                    if (avaliacao == null)
+                        System.Diagnostics.Debug.WriteLine($"[Polling] Tentativa {attempts}: ID {id} não encontrado na lista.");
+                    else
+                        System.Diagnostics.Debug.WriteLine($"[Polling] Tentativa {attempts}: ID encontrado. Resultado: {avaliacao.Resultado}");
+
+                    // Se encontrou e o resultado mudou de -1
+                    if (avaliacao != null && avaliacao.Resultado != -1)
+                    {
+                        return avaliacao.ToResultado();
+                    }
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine($"[Polling] Erro API: {response.StatusCode}");
+                }
+            }
+            catch (Exception ex)
+            {
+                // Apenas loga o erro e continua tentando
+                System.Diagnostics.Debug.WriteLine($"[Polling] Erro de exceção: {ex.Message}");
+            }
+        }
+
+        throw new Exception("O servidor demorou muito para responder. Tente consultar o histórico mais tarde.");
+    }
+
+
+
+
+
+}
+
+
+public class ApiResponseSono
+{
+    [System.Text.Json.Serialization.JsonPropertyName("message")]
+    public string Message { get; set; }
+
+    [System.Text.Json.Serialization.JsonPropertyName("avaliacao")]
+    public AvaliacaoSonoResponseItem Avaliacao { get; set; }
+}
+
+public class AvaliacaoSonoResponseItem
+{
+    [System.Text.Json.Serialization.JsonPropertyName("id")]
+    public string Id { get; set; }
+
+    [System.Text.Json.Serialization.JsonPropertyName("resultado")]
+    public int Resultado { get; set; }
 }
